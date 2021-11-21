@@ -1,0 +1,449 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load custom_tags %}
+{% load hitcount_tags %}
+{% load social_share %}
+{% load i18n %}
+
+
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+
+
+{% block css %}
+
+    <style>
+
+        /*GLOBAL*/
+        [data-editorjs-wrapper] {
+            width: 100%;
+            border-radius: 4px;
+            background: #fff;
+            color: #000;
+            padding: .4em .5em;
+            display: inline-block;
+            border: none;
+        }
+
+        .codex-editor {
+        }
+
+
+        /*LIST*/
+        body .codex-editor .cdx-list {
+            margin: 0;
+            padding-left: 40px;
+            outline: none;
+        }
+
+        body .codex-editor .cdx-list__item {
+            padding: 5.5px 0 5.5px 3px;
+            line-height: 1.6em;
+            list-style: inherit;
+        }
+
+
+        body .codex-editor .cdx-list--unordered {
+            list-style: disc;
+        }
+
+        body .codex-editor .cdx-list--ordered {
+            list-style: decimal;
+        }
+
+        body .codex-editor .cdx-list-settings {
+            display: flex;
+        }
+
+        body .codex-editor .cdx-list-settings .cdx-settings-button {
+            width: 50%;
+        }
+
+        /*HEADER*/
+        body .codex-editor .ce-header {
+            padding: 1em 0;
+            margin: 0;
+            margin-bottom: -0.7em;
+            line-height: 1.5em;
+            outline: none;
+            background: transparent;
+            color: #000;
+            font-weight: 800;
+            text-transform: initial;
+        }
+
+        body .codex-editor h1.ce-header {
+            font-size: 2em;
+        }
+
+        body .codex-editor h2.ce-header {
+            font-size: 1.5em;
+        }
+
+        body .codex-editor h3.ce-header {
+            font-size: 1.17em;
+        }
+
+        body .codex-editor h4.ce-header {
+            font-size: 1.17em;
+        }
+
+        body .codex-editor h5.ce-header {
+            font-size: 1em;
+        }
+
+        body .codex-editor h6.ce-header {
+            font-size: 0.67em;
+        }
+
+        body .codex-editor blockquote {
+            border: initial;
+            margin: initial;
+            color: initial;
+            font-size: inherit;
+        }
+
+        .cdx-block {
+            padding: .4em 0;
+        }
+
+
+        .ce-delimiter {
+            line-height: 1.6em;
+            width: 100%;
+            text-align: center;
+        }
+
+        .ce-delimiter:before {
+            display: inline-block;
+            content: "***";
+            font-size: 30px;
+            line-height: 65px;
+            height: 30px;
+            letter-spacing: 0.2em;
+        }
+
+
+        .cdx-input {
+            border: 1px solid rgba(201, 201, 204, .48);
+            -webkit-box-shadow: inset 0 1px 2px 0 rgb(35 44 72 / 6%);
+            box-shadow: inset 0 1px 2px 0 rgb(35 44 72 / 6%);
+            border-radius: 3px;
+            padding: 10px 12px;
+            outline: none;
+            width: 100%;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .cdx-input.image-tool__caption {
+            border: none;
+            text-align: center;
+            box-shadow: none;
+        }
+
+        .cdx-quote__text {
+            height: fit-content;
+            min-height: fit-content;
+            margin-bottom: 10px;
+        }
+
+        body .codex-editor .link-tool__progress {
+            float: initial;
+            width: 100%;
+            line-height: initial;
+            padding: initial;
+        }
+
+        .ce-rawtool__textarea {
+            min-height: 200px;
+            resize: vertical;
+            border-radius: 5px;
+            background-color: #1e2128;
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            font-size: 10px;
+            line-height: 1.8;
+            letter-spacing: -0.2px;
+            color: #9ca3b3;
+        }
+
+        .image-tool__image-picture {
+            margin: 0 auto;
+            vertical-align: bottom;
+            display: block;
+        }
+
+        .cdx-checklist__item--checked .cdx-checklist__item-checkbox {
+            background: #388ae5;
+            border-color: #388ae5;
+        }
+
+        .cdx-checklist__item-checkbox {
+            display: inline-block;
+            flex-shrink: 0;
+            position: relative;
+            width: 20px;
+            height: 20px;
+            margin: 10px 10px 10px 0;
+            border-radius: 50%;
+            border: 1px solid #d0d0d0;
+            background: #fff;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .cdx-warning::before {
+            left: -25px;
+        }
+
+        .cdx-warning__title {
+            background-color: #fff3cd;
+        }
+
+        .ce-block a {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+
+        @media (min-width: 651px) {
+            .codex-editor--narrow .ce-block--focused {
+                margin-right: -50px;
+                padding-right: 50px;
+            }
+        }
+
+        @media screen and (min-width: 800px) {
+            .image-tool__image-picture {
+                max-width: calc(100% - 15%);
+            }
+        }
+
+        @media screen and (max-width: 800px) {
+            .image-tool__image-picture {
+                max-width: 100%;
+            }
+        }
+
+
+    </style>
+
+{% endblock %}
+
+{% block ust_icerik %}
+
+
+    <script type="text/javascript" rel="script" src="{% static 'js/editorjs_plugins.js' %}"></script>
+
+
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="content c-detail">
+
+        <div class="block-detail" style="height: fit-content">
+
+            <div class="post-profile">
+
+                <a href="{% url 'accounts:user-profile' article.author_of_article.username %}">
+                    <div class="user-info">
+                        {% if article.author_of_article.userprofile.get_profile_photo %}
+                            <img src="{{ article.author_of_article.userprofile.get_profile_photo }}"
+                                 alt="user"
+                                 style="width:30px;clip-path: circle()">
+                        {% endif %}
+                        <div>
+                            <div class="dv-size">
+                                {{ article.author_of_article.get_full_name }}
+                            </div>
+                            <div class="username">
+                                <span>@{{ article.author_of_article|truncatechars:15 }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <div class="time time-info">
+                    <div>
+                        <div>
+                            {{ article.created|date:"d/m/Y" }}
+                        </div>
+                        <div>
+                            {{ article.created|time }}
+                        </div>
+                        <div style="display:flex;flex-direction: row;align-items: center;">
+                            <i class="fa fa-eye" aria-hidden="true"></i> <span
+                                style="margin-left:5px">{% get_hit_count for article %}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="post-profile">
+                <div class="directory dv-size">
+                    <a href="{% url 'journal_category_detail' article.journal_name_of_article.category.slug %}">{{ article.journal_name_of_article.category }}</a>
+                    >
+                    <a href="{% url 'journal_detail' article.journal_name_of_article.slug %}">{{ article.journal_name_of_article }}</a>
+                    >
+                    <a href="#">{{ article.issue_name_of_article }}</a>
+                </div>
+
+
+            </div>
+
+            <div class="post-content" style="height: fit-content">
+
+                {% if article.article_image %}
+                    <img style="max-height: 300px;max-width: 100%;object-fit: contain;border-radius:10px;"
+                         src="{{ article.article_image.url }}"
+                         alt="">
+                {% endif %}
+
+                <div class="text-center mt-4 mb-0">
+                    <span style="font-size: 2.5rem;font-weight:700">{{ article.article_title }}</span>
+                </div>
+
+                <div id="article_content">
+                    <div class="">
+                        <div data-editorjs-wrapper="">
+                            <div data-editorjs-holder="">
+                                <div class="codex-editor">
+                                    <div class="codex-editor__redactor">
+                                        {{ article.article_content | editorjs | safe }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="post-footer f-detail">
+                <div>
+                    {% post_to_whatsapp article.slug "<i class='fab fa-whatsapp'></i>" %}
+                </div>
+                <div>
+                    {% post_to_facebook article.slug "<i class='fab fa-facebook'></i>" %}
+                </div>
+                <div>
+                    {% post_to_twitter article.article_title|truncatechars:30|safe article.slug "<i class='fab fa-twitter'></i>" %}
+                </div>
+            </div>
+
+
+            {% if  article.author_of_article == request.user %}
+                <div class="post-footer edit-detail">
+                    <a href="{% url 'article_update' article.slug %}"
+                       class="btn btn-success post-upd">Düzenle</a>
+                    <a href="{% url 'article_delete' article.slug %}" class="btn btn-danger post-del">Sil</a>
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <div class="content c-detail">
+        <div class="block-detail" style="height: fit-content">
+
+            <div class="post-profile">
+                <div style="display: flex;justify-content: center;align-items: center"><i class="fa fa-comment"></i>
+                    <span class="dv-size ml-2">Yorumlar</span></div>
+                <div class="dv-size">{{ article.get_comments_article }} Yorum</div>
+            </div>
+
+
+
+            {% if user.is_authenticated %}
+                <div class="card" style="width: 90%;background: none;border: none;align-self: center">
+                    <div class="card-body text-center">
+                        {% crispy form %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="card" style="background: none;border: none">
+                    <div class="card-body text-center">
+                        <h4 class="card-title" style="margin-bottom: 10px;">Yorum Yapmak İçin Lütfen</h4>
+                        <p class="card-text">
+                            <a class="text-efl" href="{% url "accounts:sign_up" %}">{% trans "Sign Up" %}</a>
+                            veya
+                            <a class="text-efl" href="{% url "accounts:log_in" %}">{% trans "Sign in" %}</a>
+
+                        </p>
+                    </div>
+                </div>
+            {% endif %}
+
+
+
+            {% if article.get_comments_article == 0 %}
+
+                <div class="post-footer">
+
+                    <h3>Henüz Yorum Yok</h3>
+
+                </div>
+
+            {% else %}
+
+                <div class="post-footer f-comment">
+
+                    {% for i in article.get_article_comments %}
+                        <div class="row-comment" style="border-top: 0.5px solid #7B5AF2;width: 100%;padding: 10px">
+                            <div class="d-flex w-100 justify-content-between">
+                                {% if i.article_comment_user.userprofile.get_profile_photo %}
+
+                                    <div class="mb-3" style="display:inline;vertical-align:middle">
+                                        <a href="{% url 'accounts:user-profile' i.article_comment_user.username %}">
+                                            <img src="{{ i.article_comment_user.userprofile.get_profile_photo }}"
+                                                 alt="user"
+                                                 style="width:30px;height: 25px;clip-path: circle()">
+                                            <span style="display:inline-block;vertical-align:middle;">
+                                                <span style="text-align:left" class="dv-size">
+                                                    {{ i.article_comment_user }}
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </div>
+
+                                {% endif %}
+                                <small>
+                                    {{ i.created|timesince }} {% trans "ago" %}
+                                </small>
+                            </div>
+
+                            <div class="mb-1" style="display: flex;justify-content: space-between">
+                                <div class="dv-size">
+                                    {{ i.article_comment_content|safe }}
+                                </div>
+
+                                {% if i.article_comment_user.username == request.user.username and i.article_comment_user.username != None %}
+                                    <div class="bg-danger"
+                                         style="border-radius:8px;display: flex;align-items: center;padding: 4px 9px;align-self: center">
+                                        <a class="text-wht" href="{% url 'article_comment-delete' i.id %}">
+                                            {% trans "delete" %}
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+
+                </div>
+
+            {% endif %}
+
+
+        </div>
+
+    </div>
+
+{% endblock %}

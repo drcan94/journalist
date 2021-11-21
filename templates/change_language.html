@@ -1,0 +1,31 @@
+{% load i18n %}
+
+{% get_current_language as language_code %}
+{% get_available_languages as languages %}
+
+
+<div class="dropdown-menu" aria-labelledby="dropdownMenuLink3">
+
+    <form action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ redirect_to }}"/>
+        <div style="text-align: center;display: flex;justify-content: center;align-items: center">
+            {% for code, name in languages %}
+                    <button type="submit"
+                            name="language"
+                            value="{{ code }}"
+                            style="padding: 2px 5px; border: none;margin: 0; color:#ffffff;{% if language_code == code %} background: #98aee8; border-radius: 10px; {% else %} background: none;{% endif %}">
+                        <img src="/content/static/icons/flags/{{ code }}.png" alt=""
+                             style="width: 25px;height: 25px;object-fit:cover">
+                        {{ name }}
+                    </button>
+
+            {% endfor %}
+        </div>
+    </form>
+
+
+</div>
+
+
+

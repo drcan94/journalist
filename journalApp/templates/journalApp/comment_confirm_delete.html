@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    {% trans "Are you sure?" %}
+{% endblock %}
+
+
+{% block style %}
+
+{% endblock %}
+
+{% block content %}
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <p class="alert alert-danger text-center">Bu Yorumu Silmek İstediğinize Emin
+            misiniz ?</p>
+        <div style="text-align: center">
+            <button type="submit" class="btn btn-primary radius">SİL</button>
+            <a href="{% url 'article_detail' object.article.slug %}"
+               class="btn btn-danger radius">İPTAL</a>
+        </div>
+    </form>
+
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <table>
+        <thead>
+        <tr>
+            <th>kullanıcı</th>
+            <th>dergi</th>
+            <th>işlemler</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if assessments %}
+            {% for assest in assessments %}
+                <tr>
+                    <td>{{ assest.user.username }}</td>
+                    <td>{{ assest.journal }}</td>
+                    <td>
+                        <a class="btn btn-success" href="/accept/{{ assest.id }}">kabul et</a>
+                        <a class="btn btn-danger" href="/reject/{{ assest.id }}">reddet</a>
+                        <a class="btn btn-danger" href="/blocked/{{ assest.id }}">engelle</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            hiç başvuru yok
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

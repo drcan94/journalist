@@ -1,0 +1,139 @@
+{% load i18n %}
+{% load static %}
+
+<a href="#" role="button" id="dropdownMenuLink2" style="color:black" data-toggle="dropdown" aria-haspopup="true"
+   aria-expanded="false">
+    <img src="{% static 'icons/notification-frame.svg' %}" alt="">
+    <div class="noti-num">
+    	<span class="text-xs">
+          	{% if count > 0 %} {{ count }} {% else %} 0 {% endif %}            
+        </span>
+    </div>
+</a>
+
+<div class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+
+    {% if count == 0 %}
+
+        <a class="dropdown-item" href="#">
+            {% trans "No Notification" %}
+        </a>
+
+    {% else %}
+
+        {% for notification in notifications %}
+
+            {% if notification.article %}
+
+                {% if notification.notification_type == 1 %}
+
+                    <a class="dropdown-item"
+                       href="{% url "article_notification" notification.id notification.article.slug %}">
+                        @{{ notification.from_user }} liked your article
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="font-size: 2rem">&times;</span>
+                        </button>
+                    </a>
+
+
+                {% endif %}
+
+                {% if notification.notification_type == 2 %}
+
+                    <a class="dropdown-item"
+                       href="{% url "article_notification" notification.id notification.article.slug %}">
+                        @{{ notification.from_user }} commented on your article
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="font-size: 2rem">&times;</span>
+                        </button>
+                    </a>
+
+                {% endif %}
+
+
+            {% elif notification.comment %}
+
+                {% if notification.notification_type == 1 %}
+
+                    <a class="dropdown-item"
+                       href="{% url "article_notification" notification.id notification.comment.article.slug %}">
+                        @{{ notification.from_user }} liked your comment
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="font-size: 2rem">&times;</span>
+                        </button>
+                    </a>
+
+                {% endif %}
+
+                {% if notification.notification_type == 2 %}
+
+                    <a class="dropdown-item"
+                       href="{% url "article_notification" notification.id notification.comment.article.slug %}">
+                        @{{ notification.from_user }} replied to your comment
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="font-size: 2rem">&times;</span>
+                        </button>
+                    </a>
+
+                {% endif %}
+
+            {% elif notification.journal %}
+
+                {% if notification.notification_type == 3 %}
+
+                    <a class="dropdown-item" href="{% url "request_notification" notification.id %}">
+                        @{{ notification.from_user }} requested for Authorship
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="font-size: 2rem">&times;</span>
+                        </button>
+                    </a>
+
+                {% endif %}
+
+                {% if notification.notification_type == 4 %}
+
+                    <a class="dropdown-item"
+                       href="{% url "journal_notification" notification.id notification.journal.slug %}">
+                        @{{ notification.from_user }} subscribed {{ notification.journal.journal_name }}
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="font-size: 2rem">&times;</span>
+                        </button>
+                    </a>
+
+                {% endif %}
+
+                {% if notification.notification_type == 5 %}
+
+                    <a class="dropdown-item"
+                       href="{% url "request_notification" notification.id %}">
+                        @{{ notification.to_user }} has accepted your reqeuest
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="font-size: 2rem">&times;</span>
+                        </button>
+                    </a>
+
+                {% endif %}
+
+                {% if notification.notification_type == 6 %}
+
+                    <a class="dropdown-item"
+                       href="{% url "request_notification" notification.id %}">
+                        @{{ notification.to_user }} has rejected your request
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="font-size: 2rem">&times;</span>
+                        </button>
+                    </a>
+
+                {% endif %}
+
+            {% endif %}
+
+        {% endfor %}
+
+
+    {% endif %}
+
+</div>
+	
+
+

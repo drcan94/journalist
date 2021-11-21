@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Dergi Güncelleme
+{% endblock %}
+
+{% block style %}
+
+{% endblock %}
+
+{% block content %}
+    <h4 style="margin:0 auto">Dergini Güncelle</h4>
+    {% crispy form %}
+{% endblock %}

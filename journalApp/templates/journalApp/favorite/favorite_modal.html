@@ -1,0 +1,23 @@
+{% load i18n %}
+
+<div class="modal fade" style="margin-top: 60px;max-height: calc(100vh - 110px)" id="post-favorite-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="height:50px;align-items:center">
+                <h3 class="modal-title dv-size" id="exampleModalLongTitle">{% trans "Likes" %}</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="font-size: 2rem">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="max-height: calc(100vh - 257px);overflow-y: auto;">
+                {% if not request.user.is_authenticated %}
+                {% trans "To see the likes, please" %} <a href="{% url 'accounts:log_in' %}" style="color:red">{% trans "Sign In" %}</a>
+                {% endif %}
+            </div>
+            <div class="modal-footer" style="height: 60px;">
+                <button type="button" class="btn btn-secondary dv-size" style="letter-spacing: 1px" data-dismiss="modal">{% trans "Close!" %}</button>
+            </div>
+        </div>
+    </div>
+</div>

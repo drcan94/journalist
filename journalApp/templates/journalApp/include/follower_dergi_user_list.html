@@ -1,0 +1,27 @@
+{% if user_list %}
+    {% for i in user_list %}
+        <div style="display: flex" class="user-list">
+
+            <a href="{% url 'accounts:user-profile' i.username %}" style="text-decoration: none">
+                <div class="user-info">
+                    {% if i.userprofile.get_profile_photo %}
+                        <img src="{{ i.userprofile.get_profile_photo }}"
+                             alt="user"
+                             style="width:30px;height:30px;clip-path: circle()">
+                    {% endif %}
+                    <div>
+                        <div class="dv-size">
+                            {{ i.get_full_name }}
+                        </div>
+                        <div class="username">
+                            <span>@{{ i|truncatechars:15 }}</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    {% endfor %}
+{% else %}
+    Henüz Beğeni Yok
+{% endif %}

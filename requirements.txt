@@ -1,0 +1,13 @@
+django
+django_crispy_forms
+django_bootstrap4
+django-hitcount
+django-seed
+django-social-share
+django-import-export
+psycopg2-binary
+Unidecode
+Pillow
+fontawesome-free==5.15.3
+django
+django-editorjs

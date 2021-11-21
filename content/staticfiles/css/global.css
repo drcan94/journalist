@@ -1,0 +1,84 @@
+/* text settings */
+
+.text-center {
+    text-align: center;
+}
+
+.text-xs {
+    font-size: 0.85rem;
+}
+
+.text-sm {
+    font-size: 1.2rem;
+}
+
+.text-md {
+    font-size: 1.6rem;
+}
+
+.text-lg {
+    font-size: 2rem;
+}
+
+.text-xl {
+    font-size: 2.5rem;
+}
+
+/* btn settings */
+
+.rd {
+    border-radius: 1rem;
+}
+
+.rd-bottomm {
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+.rd-top {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+.rd-left {
+    border-bottom-left-radius: 1rem;
+    border-top-left-radius: 1rem;
+}
+
+.rd-right {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+.pd {
+    padding: .5rem .9rem;
+}
+
+.text-efl {
+    color: #7B5AF2 !important;
+}
+
+.text-wht {
+    color: white !important;
+}
+
+.brdr-efl {
+    border: 0.5px solid #000000;
+}
+
+.bg-efl {
+    background-color: #000000;
+}
+
+
+.bg-white {
+    background-color: #f0f0f6;
+}
+
+.bg-blue {
+    background-color: rgb(99, 158, 247);
+}
+
+.bg-danger {
+    background-color: #ea1919;;
+}

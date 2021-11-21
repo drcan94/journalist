@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Dergi Silme
+{% endblock %}
+
+
+{% block style %}
+
+{% endblock %}
+
+{% block content %}
+
+
+    <form action="" method="post" class="mb-20">
+        {% csrf_token %}
+        <p class="alert alert-danger">Bu Dergiyi Silmek İstediğinize Emin misiniz ?</p>
+        <div style="text-align: center">
+            <button type="submit" class="btn btn-primary radius">SİL</button>
+            <a href="{% url 'journal_detail' object.slug %}" class="btn btn-danger radius">İPTAL</a>
+        </div>
+    </form>
+      
+
+
+{% endblock %}

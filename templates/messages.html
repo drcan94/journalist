@@ -1,0 +1,11 @@
+{% load i18n %}
+
+
+{% if messages %}
+    {% for message in messages %}
+        <div {% if message.tags %} class="alert alert-dismissible timer alert-{{ message.tags }} msgs" {% endif %}>
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <p style="font-size:16px;margin:10px 8px;text-align:center">{{ message|safe }}</p>
+        </div>
+    {% endfor %}
+{% endif %}

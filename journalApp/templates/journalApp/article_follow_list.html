@@ -1,0 +1,264 @@
+{% extends "base.html" %}
+{% load static %}
+{% load hitcount_tags %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Articles" %}
+{% endblock %}
+
+{% block ust_icerik %}
+
+    <script type="text/javascript" rel="script">
+        $(document).ready(function () {
+            $(".post-footer").on("click", ".add-favorite-button", function (e) {
+                e.preventDefault();
+                var $this = $(this);
+                var $url = $this.attr("href");
+                $.ajax({
+                    url: $url,
+                    method: "GET",
+                    data: {},
+                    success: function (data) {
+                        var response = data.status;
+                        var count = data.count;
+                        var $i = $this.find(".fav-hand");
+                        console.log($i);
+                        if (response === "added") {
+                            $i.removeClass("fav-deactive");
+                            $i.addClass("fav-active");
+                        } else {
+                            $i.removeClass("fav-active");
+                            $i.addClass("fav-deactive");
+
+                        }
+                        $this.closest("div").find(".favorite-count").html(count)
+                    }
+                })
+            }).on("click", ".likesbtn", function (e) {
+                e.preventDefault();
+                var $this = $(this);
+                var $url = $this.attr("url");
+                var $modal = $("#post-favorite-modal");
+                $.ajax({
+                    url: $url,
+                    method: "GET",
+                    dataType: "json",
+                    beforeSend: function () {
+                        $modal.modal("show");
+                    },
+                    success: function (data) {
+                        $modal.find(".modal-body").html(data.html)
+                    }
+
+                })
+            });
+
+
+        });
+
+    </script>
+
+{% endblock %}
+
+{% block content %}
+
+    {% include "journalApp/favorite/favorite_modal.html" %}
+
+    
+    <div class="container-fluid" style="margin-top: -10px">
+        <form action="" method="get">
+            <div class="input-group" style="justify-content: center">
+                <div class="form-outline" style="width: 40%">
+                    <input type="search" id="form1" class="form-control" name="search"
+                           style="font-size: 1.5rem"
+                           placeholder="{% trans 'Search' %}" {% if request.GET.search %}
+                           value="{{ request.GET.search }}" {% endif %}
+                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ara'"/>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </form>
+    </div>  
+
+    {% if request.GET.search %}
+        <div style="text-align: center;margin: 10px 0 10px 0">
+            <span class="subheading">
+                {% if allcounter == 0 %}
+                    <a class="btn btn-dark" href="{% url 'article_create' %}">'{{ request.GET.search }}' ile ilgili sonuç yok. Lütfen Bu Konuda Sen Yaz!</a>
+                {% else %}
+                    '{{ request.GET.search }}' ile ilişkili {{ allcounter }} sonuç
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+
+    {% if x == 0 %}
+        <div class="container text-center mt-3">
+            <span>Henüz Bir Makale Yok</span><br>
+            <a style="color:red"
+               href="{% url 'journalall' %}">
+                <span>Makalelerini Okumak İstediğiniz Dergiler İçin Tıklayınız</span>
+            </a>
+
+        </div>
+
+    {% elif x == 1 %}
+        <div class="content">
+
+            {% for post in article_follow %}
+                <div class="block" style="position:relative;">
+                    <div class="post-profile">
+                        <div>
+                            <a href="{% url 'accounts:user-profile' post.author_of_article.username %}"
+                               style="text-decoration:none;">
+                                <div style="font-size: 0.9rem;text-align:left;width: 100%">
+                                    {% if post.author_of_article.userprofile.get_profile_photo %}
+                                        <div style="display:inline;vertical-align:middle">
+                                            <img src="{{ post.author_of_article.userprofile.get_profile_photo }}"
+                                                 alt="user"
+                                                 style="width:30px;height:30px;clip-path: circle();object-fit: cover">
+                                        </div>
+                                    {% endif %}
+                                    <div style="display:inline-block;vertical-align:middle;margin-left: 3px">
+                                        <span style="text-align:left;font-size:14px"
+                                              class="post-meta">
+                                            {{ post.author_of_article }}
+                                        </span><br>
+                                        <span>{{ post.created|timesince }} {% trans 'ago' %}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {% if post.journal_name_of_article.journal_name in requestable and post.journal_name_of_article.get_requesting_status == "open" %}
+
+                            <div class="requesting">
+
+                                <a href="{% url 'authorship-request' post.journal_name_of_article.slug %}">{% trans "Be Author" %}</a>
+
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="post-content">
+
+                        {% if post.article_image %}
+                            <div style="padding:0;text-align: center">
+                                <a href="{% url 'article_detail' post.slug %}" style="cursor: pointer">
+                                    <img style="width:100%;max-height:180px;border-radius: 2px;object-fit:cover;object-position: 50% 50%;"
+                                         src="{{ post.article_image.url }}" alt="">
+                                </a>
+                            </div>
+                        {% endif %}
+
+                        <div>
+                            <a href="{% url 'article_detail' post.slug %}" style="cursor: pointer">
+                                <div class="post-title text-center"
+                                     style="{% if post.article_image %} height: 100px {% else %} height:280px {% endif %}">
+                                    <span style="font-weight:bolder;font-size:2rem;color:#f1f1f1;">
+                                        {{ post.article_title|safe|truncatechars:45 }}
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div style="display: flex;flex-direction:row;justify-content: space-between;align-items: center" class="category_journal">
+                            <div>
+                                <a href="{% url 'journal_detail' post.journal_name_of_article.slug %}">
+                                    <div class="classification">
+                                        {{ post.journal_name_of_article }}
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div style="border-left: 1px solid white">
+                                <a href="{% url 'journal_category_detail' post.journal_name_of_article.category.slug %}">
+                                    <div class="classification">
+                                        {{ post.journal_name_of_article.category }}
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="post-footer">
+                        <div>
+                            <i class="fa fa-comment" aria-hidden="true"></i>
+                            {{ post.get_comments_article }}
+                        </div>
+                        <div>
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                            {% get_hit_count for post %}
+                        </div>
+                        <div style="display: flex;justify-content: center;align-items: center">
+                            <a class="add-favorite-button" style="width:fit-content"
+                               href="{% url 'favorite-article-page' post.slug %}">
+                                <i class="fas fa-heart fav-hand {% if request.user.username in post.get_added_favorite_article_user %} fav-active {% else %} fav-deactive {% endif %}"></i>
+                            </a>
+                            <button class="btn likesbtn" url="{% url 'favorite-article-user' post.slug %}"
+                                    style="margin-left: 5px;border-radius: 50%;background: #7B5AF2;color: white;font-size: 1.1rem">
+                                <span class="favorite-count"> {{ post.get_favorite_article_count }}</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div>
+        {% if article_follow.has_other_pages %}
+            <div style="text-align:center;width: fit-content;margin: 0 auto 20px auto">
+                <nav class="navigation">
+                    <ul class="pagination">
+                        {% if article_follow.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="?page=1{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">1</a>
+                            </li>
+                            {% if article_follow.previous_page_number != 1 %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=
+                                            {{ article_follow.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"><i
+                                            class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i></a>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                        <li class="page-item active">
+                            <a class="page-link" style="cursor:pointer">
+                                {% if article_follow.number == 1 %}
+                                    1
+                                {% elif article_follow.number == article_follow.paginator.num_pages %}
+                                    {{ article_follow.paginator.num_pages }}
+                                {% else %}
+                                    {{ article_follow.number }}
+                                {% endif %}
+                            </a>
+                        </li>
+                        {% if article_follow.has_next %}
+                            {% if article_follow.number|add:1 < article_follow.paginator.num_pages and article_follow.next_page_number != article_follow.paginator.num_pages %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=
+                                            {{ article_follow.number|add:1 }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"><i
+                                            class="fas fa-caret-right"></i><i
+                                            class="fas fa-caret-right"></i></a>
+                                </li>
+                            {% endif %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="?page=
+                                           {{ article_follow.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ article_follow.paginator.num_pages }}</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        {% endif %}
+    </div>
+
+
+{% endblock %}

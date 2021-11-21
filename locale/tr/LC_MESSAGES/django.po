@@ -1,0 +1,983 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-09-16 00:20+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: accounts/forms.py:21
+msgid "Password"
+msgstr "Parola"
+
+#: accounts/forms.py:27
+msgid "Remember me"
+msgstr "Beni Hatırla"
+
+#: accounts/forms.py:36
+msgid "Invalid Password"
+msgstr "Geçersiz Parola"
+
+#: accounts/forms.py:42 accounts/forms.py:274
+msgid "Username"
+msgstr "Kullanıcı Adı"
+
+#: accounts/forms.py:55 accounts/forms.py:79
+msgid "You Have Entered an Invalid Username"
+msgstr "Geçersiz bir kullanıcı adı girdiniz"
+
+#: accounts/forms.py:58 accounts/forms.py:82 accounts/forms.py:106
+#: accounts/forms.py:237 accounts/forms.py:264 accounts/forms.py:359
+msgid "This Account Is Inactive"
+msgstr "Bu hesap aktif değil"
+
+#: accounts/forms.py:66 accounts/forms.py:126 accounts/forms.py:182
+#: accounts/forms.py:218 accounts/forms.py:312 accounts/forms.py:339
+msgid "E-mail"
+msgstr "E-mail"
+
+#: accounts/forms.py:90 accounts/forms.py:146 accounts/forms.py:245
+msgid "E-Mail or Username"
+msgstr "E-mail veya Kullanıcı Adı"
+
+#: accounts/forms.py:103 accounts/forms.py:163 accounts/forms.py:261
+msgid "You Have Entered an Invalid E-Mail Address or Username"
+msgstr "Geçersiz bir E-mail veya Kullanıcı Adı girdiniz"
+
+#: accounts/forms.py:126
+msgid "Necessary! Enter an Existing E-Mail Address"
+msgstr "Gerekli! Mevcut bir E-mail adresi giriniz"
+
+#: accounts/forms.py:133
+msgid "This E-Mail Address is Registered in the System"
+msgstr "Bu E-Mail adresi sistemde kayıtlı"
+
+#: accounts/forms.py:140 accounts/forms.py:307
+msgid "This username is registered in the System"
+msgstr "Bu Kullanıcı Adı sistemde kayıtlı"
+
+#: accounts/forms.py:142
+msgid "Invalid Username, Do not use special characters!"
+msgstr "Geçersiz Kullanıcı Adı, Lütfen Özel Karakter Kullanmayınız!"
+
+#: accounts/forms.py:155 accounts/forms.py:191 accounts/forms.py:227
+#: accounts/forms.py:254 accounts/forms.py:322 accounts/forms.py:347
+#: home/forms.py:20
+msgid "Send"
+msgstr "Gönder"
+
+#: accounts/forms.py:166 accounts/forms.py:202
+msgid "This Account Is Already Active"
+msgstr "Bu hesap zaten aktif"
+
+#: accounts/forms.py:170 accounts/forms.py:206
+msgid "Failed to Verify Activation Code"
+msgstr "Aktivasyon Kodu Doğrulanamadı"
+
+#: accounts/forms.py:174 accounts/forms.py:210
+msgid "Activation Code Already Sent, But You Can Try Again In 24 Hours"
+msgstr ""
+"Aktivasyon Kodu Zaten Gönderildi Fakat 24 Saat Sonra Tekrar Deneyebilirsiniz"
+
+#: accounts/forms.py:199 accounts/forms.py:234 accounts/forms.py:356
+msgid "You Have Entered an Invalid E-Mail Address"
+msgstr "Geçersiz Bir E-Mail Adresi Girdiniz"
+
+#: accounts/forms.py:272
+msgid "First Name"
+msgstr "Adınız"
+
+#: accounts/forms.py:273
+msgid "Last Name"
+msgstr "Soyadınız"
+
+#: accounts/forms.py:275 accounts/models.py:33 accounts/models.py:34
+msgid "Gender"
+msgstr "Cinsiyet"
+
+#: accounts/forms.py:277 accounts/models.py:36
+msgid "Date of birth"
+msgstr "Doğum Tarihi"
+
+#: accounts/forms.py:278 accounts/models.py:35
+msgid "Profile Photo"
+msgstr "Profil Fotoğrafı"
+
+#: accounts/forms.py:279 accounts/models.py:32
+msgid "About Me"
+msgstr "Hakkımda"
+
+#: accounts/forms.py:298 journalApp/forms.py:151 journalApp/forms.py:171
+msgid "Update"
+msgstr "Güncelle"
+
+#: accounts/forms.py:303
+msgid "Please Enter a Username"
+msgstr "Geçersiz bir kullanıcı adı girdiniz"
+
+#: accounts/forms.py:329
+msgid "This E-Mail Is Already Yours"
+msgstr "Bu E-Mail zaten size ait"
+
+#: accounts/forms.py:333
+msgid "You Cannot Use This E-Mail Address"
+msgstr "Bu E-Mail adresini kullanamazsınız"
+
+#: accounts/models.py:31
+msgid "User"
+msgstr "Kullanıcı"
+
+#: accounts/models.py:33
+msgid "Man"
+msgstr "Erkek"
+
+#: accounts/models.py:33
+msgid "Woman"
+msgstr "Kadın"
+
+#: accounts/models.py:40
+msgid "User Profiles"
+msgstr "Kullanıcı Profilleri"
+
+#: accounts/templates/accounts/emails/activate_profile.html:15
+#: accounts/templates/accounts/emails/activate_profile.txt:3
+msgid "Click on the link below to activate your profile."
+msgstr "Profilinizi etkinleştirmek için aşağıdaki bağlantıya tıklayın."
+
+#: accounts/templates/accounts/emails/change_email.html:15
+#: accounts/templates/accounts/emails/change_email.txt:3
+msgid "Click on the link below to change your e-mail address."
+msgstr "E-Mail adresinizi değiştirmek için aşağıdaki bağlantıya tıklayın"
+
+#: accounts/templates/accounts/emails/forgotten_username.html:15
+#: accounts/templates/accounts/emails/forgotten_username.txt:3
+msgid "Your Username :"
+msgstr "Kullanıcı Adınız :"
+
+#: accounts/templates/accounts/emails/restore_password_email.html:15
+#: accounts/templates/accounts/emails/restore_password_email.txt:3
+msgid "A Password Reset Request Has Been Made For Your Account."
+msgstr "Hesabınız İçin Parola Sıfırlama Talebinde Bulunuldu."
+
+#: accounts/templates/accounts/emails/restore_password_email.html:19
+#: accounts/templates/accounts/emails/restore_password_email.txt:5
+msgid "Please Set Your New Password From The Page Below."
+msgstr "Lütfen Yeni Parolanızı Aşağıdaki Sayfadan Belirleyiniz."
+
+#: accounts/templates/accounts/log_in.html:7
+msgid "Login Page"
+msgstr "Giriş Sayfası"
+
+#: accounts/templates/accounts/log_in.html:18
+msgid "Login Form"
+msgstr "Giriş Formu"
+
+#: accounts/templates/accounts/log_in.html:29
+#: accounts/templates/accounts/sign_up.html:41
+#: journalApp/templates/journalApp/favorite/favorite_modal.html:15
+msgid "Sign In"
+msgstr "Giriş Yap"
+
+#: accounts/templates/accounts/log_in.html:31
+#: accounts/templates/accounts/sign_up.html:38
+msgid "or"
+msgstr "veya"
+
+#: accounts/templates/accounts/log_in.html:34
+#: accounts/templates/accounts/sign_up.html:36
+#: journalApp/templates/journalApp/article_detail.html:136
+#: templates/base.html:106 templates/base.html:244
+msgid "Sign Up"
+msgstr "Kaydol"
+
+#: accounts/templates/accounts/log_in.html:43
+msgid "Forgot password?"
+msgstr "Parolanızı mı Unuttunuz?"
+
+#: accounts/templates/accounts/log_in.html:51
+msgid "Forgot Your Username?"
+msgstr "Kullanıcı Adınızı mı Unuttunuz?"
+
+#: accounts/templates/accounts/log_in.html:59
+#: accounts/templates/accounts/resend_activation_code.html:7
+#: accounts/templates/accounts/resend_activation_code.html:18
+msgid "Resend Activation Code"
+msgstr "Yeniden Aktivasyon Kodu Gönder"
+
+#: accounts/templates/accounts/log_out.html:6
+msgid "We hope you come again"
+msgstr "Tekrar Görüşmek Dileğiyle"
+
+#: accounts/templates/accounts/log_out.html:14
+msgid "Exit Page"
+msgstr "Çıkış Sayfası"
+
+#: accounts/templates/accounts/log_out.html:18
+msgid "Your Exit Has Been Made"
+msgstr "Çıkışınız Gerçekleştirildi"
+
+#: accounts/templates/accounts/log_out.html:20
+msgid "We are waiting for you again to spend quality time"
+msgstr "Kaliteli zaman geçirmek için tekrar bekliyor olacağız"
+
+#: accounts/templates/accounts/log_out.html:22
+msgid "Sign in again"
+msgstr "Tekrar giriş yap"
+
+#: accounts/templates/accounts/profile/change_email.html:14
+msgid "E-Mail Change"
+msgstr "E-Mail Değişimi"
+
+#: accounts/templates/accounts/profile/change_password.html:7
+#: accounts/templates/accounts/profile/change_password.html:18
+msgid "Password Change"
+msgstr "Parola Değişimi"
+
+#: accounts/templates/accounts/profile/update_profile.html:12
+msgid "Update Profile"
+msgstr "Profilini Güncelle"
+
+#: accounts/templates/accounts/profile/userprofile.html:29
+#: accounts/templates/accounts/profile/userprofile.html:272
+#: journalApp/templates/journalApp/categories/detail.html:30
+#: journalApp/templates/journalApp/categories/detail.html:151
+#: journalApp/templates/journalApp/dergi_all.html:28
+#: journalApp/templates/journalApp/dergi_all.html:176
+#: journalApp/templates/journalApp/dergi_detail.html:37
+#: journalApp/templates/journalApp/dergi_detail.html:225
+#: journalApp/templates/journalApp/dergi_list.html:28
+msgid "Unsubscribe"
+msgstr "Abonelikten Çık"
+
+#: accounts/templates/accounts/profile/userprofile.html:33
+#: accounts/templates/accounts/profile/userprofile.html:274
+#: journalApp/templates/journalApp/categories/detail.html:34
+#: journalApp/templates/journalApp/categories/detail.html:153
+#: journalApp/templates/journalApp/dergi_all.html:32
+#: journalApp/templates/journalApp/dergi_all.html:178
+#: journalApp/templates/journalApp/dergi_detail.html:41
+#: journalApp/templates/journalApp/dergi_detail.html:227
+#: journalApp/templates/journalApp/dergi_list.html:32
+msgid "Subscribe"
+msgstr "Abone Ol"
+
+#: accounts/templates/accounts/profile/userprofile.html:134
+msgid "Edit Profile"
+msgstr "Profili Güncelle"
+
+#: accounts/templates/accounts/profile/userprofile.html:145
+#: accounts/templates/accounts/profile/userprofile.html:182
+#: journalApp/models.py:77 templates/base.html:91 templates/base.html:136
+msgid "Journals"
+msgstr "Dergiler"
+
+#: accounts/templates/accounts/profile/userprofile.html:150
+#: accounts/templates/accounts/profile/userprofile.html:186
+#: journalApp/models.py:199
+#: journalApp/templates/journalApp/article_follow_list.html:7
+msgid "Articles"
+msgstr "Makaleler"
+
+#: accounts/templates/accounts/profile/userprofile.html:158
+msgid "About Me!"
+msgstr "Hakkımda"
+
+#: accounts/templates/accounts/profile/userprofile.html:215
+#: accounts/templates/accounts/profile/userprofile.html:322
+#: journalApp/templates/journalApp/article_detail.html:179
+#: journalApp/templates/journalApp/article_follow_list.html:125
+#: journalApp/templates/journalApp/categories/detail.html:94
+#: journalApp/templates/journalApp/dergi_all.html:119
+#: journalApp/templates/journalApp/dergi_detail.html:203
+#: journalApp/templates/journalApp/dergi_detail.html:366
+#: journalApp/templates/journalApp/dergi_list.html:124
+msgid "ago"
+msgstr "önce"
+
+#: accounts/templates/accounts/profile/userprofile.html:225
+#: accounts/templates/accounts/profile/userprofile.html:331
+#: journalApp/templates/journalApp/article_follow_list.html:134
+#: journalApp/templates/journalApp/categories/detail.html:104
+#: journalApp/templates/journalApp/dergi_all.html:129
+#: journalApp/templates/journalApp/dergi_detail.html:213
+#: journalApp/templates/journalApp/dergi_detail.html:376
+#: journalApp/templates/journalApp/dergi_list.html:134
+msgid "Be Author"
+msgstr "Yazar Ol"
+
+#: accounts/templates/accounts/profile/userprofile.html:281
+#: journalApp/templates/journalApp/categories/detail.html:159
+#: journalApp/templates/journalApp/dergi_all.html:184
+#: journalApp/templates/journalApp/dergi_detail.html:233
+#: journalApp/templates/journalApp/dergi_list.html:189
+msgid "Subscriber"
+msgstr "Abone"
+
+#: accounts/templates/accounts/remind_username.html:7
+#: accounts/templates/accounts/remind_username.html:18
+msgid "Username Reminder"
+msgstr "Kullanıcı Adı Hatırlatma"
+
+#: accounts/templates/accounts/restore_password.html:7
+#: accounts/templates/accounts/restore_password.html:18
+#: accounts/templates/accounts/restore_password_confirm.html:7
+#: accounts/templates/accounts/restore_password_confirm.html:18
+#: accounts/templates/accounts/restore_password_done.html:7
+#: accounts/templates/accounts/restore_password_done.html:18
+msgid "Password Reset"
+msgstr "Parola Sıfırlama"
+
+#: accounts/templates/accounts/restore_password_confirm.html:26
+msgid "Please Enter Your New Password Twice."
+msgstr "Lütfen Yeni Parolanızı İki Kez Giriniz."
+
+#: accounts/templates/accounts/restore_password_confirm.html:34
+msgid "This Link Is Invalid, Probably Used Before."
+msgstr "Bu Bağlantı Geçersiz, Muhtemelen Daha Önce Kullanılmış."
+
+#: accounts/templates/accounts/restore_password_done.html:24
+msgid ""
+"We have sent a series of instructions for renewal to your e-mail address you "
+"used while registering."
+msgstr ""
+"Kayıt olurken kullandığınız e-posta adresinize bir dizi yenileme talimatı "
+"gönderdik."
+
+#: accounts/templates/accounts/restore_password_done.html:28
+msgid "Please Check Your Mailbox."
+msgstr "Lütfen posta kutunuzu kontrol edin."
+
+#: accounts/templates/accounts/restore_password_done.html:33
+msgid ""
+"If you have not received mail, please make sure that you enter the address "
+"that you entered while registering or check your spam folder."
+msgstr ""
+"Posta almadıysanız, lütfen kayıt olurken girdiğiniz adresi girdiğinizden "
+"emin olun veya spam klasörünüzü kontrol edin."
+
+#: accounts/templates/accounts/sign_up.html:8
+msgid "Sign up"
+msgstr "Kaydol"
+
+#: accounts/templates/accounts/sign_up.html:25
+msgid "Registration Form"
+msgstr "Kayıt Formu"
+
+#: accounts/utils.py:19
+msgid "Profile activation"
+msgstr "Profil Aktivasyonu"
+
+#: accounts/utils.py:28
+msgid "Change email"
+msgstr "E-Mail'i değiştir"
+
+#: accounts/utils.py:37
+msgid "Restore password"
+msgstr "Parolayı yenile"
+
+#: accounts/utils.py:47
+msgid "Your username"
+msgstr "Kullanıcı Adınız"
+
+#: accounts/views.py:89
+msgid "Welcome again"
+msgstr "Tekrar Hoşgeldin"
+
+#: accounts/views.py:130
+msgid ""
+"We have received your registration, please click on the link sent for "
+"activation"
+msgstr "Kaydınızı aldık, lütfen aktivasyon için gönderilen bağlantıya tıklayın"
+
+#: accounts/views.py:137
+msgid "Your Registration is Complete, Welcome to Us"
+msgstr "Kaydınız Tamamlandı, Aramıza Hoş Geldiniz"
+
+#: accounts/views.py:155
+msgid "Your Account Has Been Activated Successfully!"
+msgstr "Hesabınız Başarıyla Etkinleştirildi!"
+
+#: accounts/views.py:185
+msgid "New Activation Code Sent To Your E-Mail Address"
+msgstr "E-Mail Adresinize Yeni Aktivasyon Kodu Gönderildi"
+
+#: accounts/views.py:254
+msgid "Your Profile Has Been Updated"
+msgstr "Profiliniz güncellendi"
+
+#: accounts/views.py:256
+msgid "Anything Changed :)"
+msgstr "Hiçbir Değişiklik Yapılmadı"
+
+#: accounts/views.py:290
+msgid "Please, Click On The Link We Sent For E-Mail Exchange"
+msgstr "Lütfen E-Mail Değişimi İçin Gönderdiğimiz Linke Tıklayınız"
+
+#: accounts/views.py:295
+msgid "Email Successfully Changed"
+msgstr "E-Mail Başarıyla Değiştirildi"
+
+#: accounts/views.py:313
+msgid "Your E-Mail Address Has Been Successfully Changed"
+msgstr "E-Mail Adresiniz Başarıyla Değiştirildi"
+
+#: accounts/views.py:326
+msgid "Your User Name Has Been Sent To Your E-Mail Address."
+msgstr "Kullanıcı Adınız E-Posta Adresinize Gönderilmiştir."
+
+#: accounts/views.py:341
+msgid "Your Password Has Been Changed."
+msgstr "Parolanız değiştirildi."
+
+#: accounts/views.py:353
+msgid "Your Password Has Been Set, you can login now."
+msgstr "Parolanız belirlendi, şimdi giriş yapabilirsiniz."
+
+#: accounts/views.py:383
+msgid "Please Login or Register to View the Page!"
+msgstr "Sayfayı Görüntülemek İçin Lütfen Giriş Yapın veya Kayıt Olun!"
+
+#: home/forms.py:16
+msgid "Enter Your Full Name"
+msgstr "Tam Adınız Giriniz"
+
+#: home/forms.py:17 home/models.py:10
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: home/forms.py:18
+msgid "Your Message"
+msgstr "Mesajınız"
+
+#: home/models.py:9
+msgid "Name"
+msgstr "Adınız"
+
+#: home/models.py:11
+msgid "Message"
+msgstr "Mesaj"
+
+#: home/templates/home/about.html:6
+msgid "About Us"
+msgstr "Hakkımızda"
+
+#: home/templates/home/about.html:17
+msgid ""
+"While the act of reading is shifting to digital day by day, I dreamed of a "
+"platform that observes simplicity and content quality. By creating a "
+"membership, you can follow authors who produce original articles or "
+"subscribe to journals that interest you. When you log in, you will only see "
+"the articles of the journals you follow. Happy Reading :)"
+msgstr ""
+"Okuma eylemi gün geçtikçe dijitale kayarken sadelik ve içerik kalitesini "
+"gözeten bir platform hayal ettim. Üyelik oluşturarak özgün makaleler üreten "
+"yazarları takip edebilir ya da ilginizi çeken dergilere abone olabilirsiniz. "
+"Giriş yaptığınızda sadece takip ettiğiniz dergilerin makalelerini "
+"göreceksiniz. Keyifli Okumalar :)"
+
+#: home/templates/home/about.html:21
+msgid ""
+"Improving content quality is an ideal we pursue as a community. You can help "
+"natural selection by liking and following the authors of the articles you "
+"deem valuable. You can also produce content yourself and share it on social "
+"media. Stay tuned to be informed about our future surprises."
+msgstr ""
+"İçerik kalitesini yükseltmek topluluk olarak gözettiğimiz bir ideal. Değerli "
+"gördüğünüz yazıları beğenip yazarlarını takip ederek doğal seçilime yardım "
+"edebilirsiniz. Kendiniz de içerikler üretip sosyal medyada "
+"paylaşabilirsiniz. Gelecekteki sürprizlerimizden haberdar olmak için takipte "
+"kalın."
+
+#: home/templates/home/contact.html:7 home/templates/home/contact.html:18
+msgid "Contact Form"
+msgstr "İletişim Formu"
+
+#: home/templates/home/contact.html:23
+msgid "Feedback and suggestions are important to us"
+msgstr "Geri bildirim ve önerileriniz bizim için değerlidir"
+
+#: home/templates/home/success.html:7 home/templates/home/success.html:18
+msgid "Feedback Received"
+msgstr "Geri Bildirim Alındı"
+
+#: home/templates/home/success.html:24
+msgid "Your Message Received!"
+msgstr "Mesajınız Alındı!"
+
+#: home/templates/home/success.html:26
+msgid "Thanks For Your Feedback"
+msgstr "Geri bildiriminiz için teşekkürler"
+
+#: home/templates/home/success.html:27
+msgid "We will get back to you as soon as possible"
+msgstr "En kısa sürede size geri döneceğiz"
+
+#: home/templates/home/success.html:30 templates/base.html:83
+msgid "Home"
+msgstr "Anasayfa"
+
+#: journal/settings.py:178
+msgid "English"
+msgstr "İngilizce"
+
+#: journal/settings.py:179
+msgid "Türkçe"
+msgstr "Türkçe"
+
+#: journal/settings.py:180
+msgid "Russian"
+msgstr "Rusça"
+
+#: journal/settings.py:181
+msgid "Chinese"
+msgstr "Çince"
+
+#: journalApp/forms.py:18
+msgid "Send Comment"
+msgstr "Yorumu Gönder"
+
+#: journalApp/forms.py:32
+msgid "Enter Journal Name"
+msgstr "Dergi Adını Giriniz"
+
+#: journalApp/forms.py:37
+msgid "Add Journal"
+msgstr "Dergi Ekle"
+
+#: journalApp/forms.py:80
+msgid "Enter Title"
+msgstr "Başlığı Giriniz"
+
+#: journalApp/forms.py:82
+msgid "You Can Enter Your Content"
+msgstr "İçeriğinizi Girebilirsiniz"
+
+#: journalApp/forms.py:84
+msgid "Add Issue"
+msgstr "Sayı EKle"
+
+#: journalApp/forms.py:91
+msgid "This Issue Name is Already Registered"
+msgstr "Bu Sayı Adı Zaten Mevcut"
+
+#: journalApp/forms.py:128
+msgid "Add Article"
+msgstr "Makale Ekle"
+
+#: journalApp/models.py:16
+msgid "Request"
+msgstr "İstek"
+
+#: journalApp/models.py:17
+msgid "Accept"
+msgstr "Kabul"
+
+#: journalApp/models.py:18
+msgid "Reject"
+msgstr "Red"
+
+#: journalApp/models.py:19
+msgid "Request Exceeded"
+msgstr "İstek Aşımı"
+
+#: journalApp/models.py:20
+msgid "Blocked"
+msgstr "Engellendi"
+
+#: journalApp/models.py:21
+msgid "Created"
+msgstr "Oluşturuldu"
+
+#: journalApp/models.py:25
+msgid "Open"
+msgstr "Açık"
+
+#: journalApp/models.py:26
+msgid "Close"
+msgstr "Kapalı"
+
+#: journalApp/models.py:30
+msgid "Founder"
+msgstr "Kurucu"
+
+#: journalApp/models.py:31
+msgid "Admin"
+msgstr "Yönetici"
+
+#: journalApp/models.py:32
+msgid "Author"
+msgstr "Yazar"
+
+#: journalApp/models.py:33
+msgid "Any"
+msgstr "Hiç"
+
+#: journalApp/models.py:46 journalApp/models.py:72
+msgid "Journal Category"
+msgstr "Dergi Kategorisi"
+
+#: journalApp/models.py:64
+msgid "Cover photo"
+msgstr "Kapak Fotoğrafı"
+
+#: journalApp/models.py:66
+msgid "Journal Name"
+msgstr "Dergi Adı"
+
+#: journalApp/models.py:76 journalApp/models.py:144
+msgid "Journal"
+msgstr "Dergi"
+
+#: journalApp/models.py:145
+msgid "Issue Name"
+msgstr "Sayı Adı"
+
+#: journalApp/models.py:146
+msgid "Year"
+msgstr "Yıl"
+
+#: journalApp/models.py:182
+msgid "Select the Journal"
+msgstr "Dergiyi Seçiniz"
+
+#: journalApp/models.py:184
+msgid "Select the Issue"
+msgstr "Sayıyı Seçiniz"
+
+#: journalApp/models.py:187
+msgid "Image"
+msgstr "Resim"
+
+#: journalApp/models.py:189
+msgid "Title"
+msgstr "Başlık"
+
+#: journalApp/models.py:192
+msgid "Content"
+msgstr "İçerik"
+
+#: journalApp/models.py:198 journalApp/models.py:250
+msgid "Article"
+msgstr "Makale"
+
+#: journalApp/models.py:253
+msgid "Comment"
+msgstr "Yorum"
+
+#: journalApp/models.py:257
+msgid "comments"
+msgstr "Yorumlar"
+
+#: journalApp/models.py:270
+msgid "Follower"
+msgstr "Takipçi"
+
+#: journalApp/models.py:275
+msgid "Journal Subscription"
+msgstr "Dergi Takibi"
+
+#: journalApp/models.py:288
+#: journalApp/templates/journalApp/favorite/favorite_modal.html:8
+msgid "Likes"
+msgstr "Beğeniler"
+
+#: journalApp/templates/journalApp/article_detail.html:138
+#: templates/base.html:241
+msgid "Sign in"
+msgstr "Giriş Yap"
+
+#: journalApp/templates/journalApp/article_detail.html:191
+msgid "delete"
+msgstr "sil"
+
+#: journalApp/templates/journalApp/categories/detail.html:8
+#: journalApp/templates/journalApp/categories/detail.html:70
+#, python-format
+msgid "Category of %(category)s"
+msgstr "%(category)s Kategorisi"
+
+#: journalApp/templates/journalApp/comment_confirm_delete.html:6
+msgid "Are you sure?"
+msgstr "Emin misin"
+
+#: journalApp/templates/journalApp/create_article.html:7
+msgid "Create an Article"
+msgstr "Makale Yaz"
+
+#: journalApp/templates/journalApp/create_dergi.html:7 templates/base.html:228
+msgid "Create a Journal"
+msgstr "Dergi Oluştur"
+
+#: journalApp/templates/journalApp/create_issue.html:7
+msgid "Create an Issue"
+msgstr "Sayı Oluştur"
+
+#: journalApp/templates/journalApp/dergi_all.html:7
+#: journalApp/templates/journalApp/dergi_all.html:66
+#: journalApp/templates/journalApp/dergi_list.html:7
+#: journalApp/templates/journalApp/dergi_list.html:69 templates/base.html:141
+msgid "All Journals"
+msgstr "Tüm Dergiler"
+
+#: journalApp/templates/journalApp/dergi_detail.html:7
+msgid "Journal Content"
+msgstr "Dergi Kategorisi"
+
+#: journalApp/templates/journalApp/dergi_list.html:7
+#: journalApp/templates/journalApp/dergi_list.html:67
+#: journalApp/templates/journalApp/include/follower_dergi_modal.html:7
+#: templates/base.html:140
+msgid "Subscriptions"
+msgstr "Abonelikler"
+
+#: journalApp/templates/journalApp/favorite/favorite_modal.html:15
+msgid "To see the likes, please"
+msgstr "Beğenileri Görmek İçin, Lütfen"
+
+#: journalApp/templates/journalApp/favorite/favorite_modal.html:19
+#: journalApp/templates/journalApp/include/follower_dergi_modal.html:18
+msgid "Close!"
+msgstr "Kapalı"
+
+#: journalApp/templates/journalApp/update_article.html:7
+msgid "Update Article"
+msgstr "Makale Ekle"
+
+#: journalApp/views.py:47 journalApp/views.py:89 journalApp/views.py:123
+#: journalApp/views.py:203
+#, python-format
+msgid ""
+"<strong>The '%(h)s'</strong> page is not available.<br>We are redirecting "
+"you to the last page."
+msgstr ""
+"<strong>'%(h)s'</strong> sayfası mevcut değil <br>Sizi son sayfaya "
+"yönlendiriyoruz."
+
+#: journalApp/views.py:182 journalApp/views.py:195
+#, python-format
+msgid ""
+"<strong>The '%(h)s'</strong> issue is not available.<br>We are redirecting "
+"you to the first page."
+msgstr ""
+"<strong>'%(h)s'</strong> sayfası mevcut değil <br>Sizi son sayfaya "
+"yönlendiriyoruz."
+
+#: journalApp/views.py:188
+#, python-format
+msgid ""
+"<strong>The '%(h)s'</strong> issue is not available.<br>We are redirecting "
+"you to the last page."
+msgstr ""
+"<strong>'%(h)s'</strong> sayfası mevcut değil <br>Sizi son sayfaya "
+"yönlendiriyoruz."
+
+#: journalApp/views.py:208
+#, python-format
+msgid ""
+"<strong>The '%(h)s'</strong> page is not available.<br>We are redirecting "
+"you to the first page."
+msgstr ""
+"<strong>'%(h)s'</strong> sayfası mevcut değil <br>Sizi son sayfaya "
+"yönlendiriyoruz."
+
+#: journalApp/views.py:251
+msgid "Your Comment Has Been Added Successfully"
+msgstr "Yorumunuz Başarıyla Eklendi"
+
+#: journalApp/views.py:357
+msgid "You can always write in your own journal :)"
+msgstr "Kendi dergine her zaman yazabilirsin :)"
+
+#: journalApp/views.py:370
+#, python-format
+msgid ""
+"Your application was rejected 3 times.<br>You no longer have the right to "
+"apply to the journal named '%(i)s'."
+msgstr ""
+"Başvurunuz 3 kez reddedildi.<br>Artık '%(i)s' adlı dergiye başvurma hakkınız "
+"yok."
+
+#: journalApp/views.py:376
+#, python-format
+msgid ""
+"You have been blocked from submitting an authorship request by the owner of "
+"the journal '%(j)s'"
+msgstr ""
+"'%(j)s' dergisinin sahibi tarafından bir yazarlık talebi göndermeniz "
+"engellendi"
+
+#: journalApp/views.py:382
+#, python-format
+msgid "You are already the author of <strong>'%(k)s'</strong> journal"
+msgstr "Zaten <strong>'%(k)s'</strong> dergisinin yazarısınız"
+
+#: journalApp/views.py:393
+#, python-format
+msgid "Your application has been made to <strong>'%(l)s'</strong> journal"
+msgstr "<strong>'%(l)s'</strong> dergisine başvurunuz yapıldı"
+
+#: journalApp/views.py:399
+#, python-format
+msgid "You Have Already Applied to <strong>'%(m)s'</strong> journal"
+msgstr "<strong>'%(m)s'</strong> dergisine zaten başvurdunuz"
+
+#: journalApp/views.py:403
+msgid "Authorship Requests are closed for this journal"
+msgstr ""
+
+#: journalApp/views.py:467
+#, python-format
+msgid "Your journal named <strong>'%(x)s'</strong> has been created"
+msgstr "<strong>'%(x)s'</strong> Başlıklı Derginiz Oluşturuldu"
+
+#: journalApp/views.py:485 journalApp/views.py:521 journalApp/views.py:581
+msgid ""
+"You Don't Have A Journal You Are The Author Of<br>You Can Create A New "
+"Journal If You Want"
+msgstr "Yazarı Olduğunu Bir Dergi Yok.<br>İsterseniz Kendi Derginizi Oluşturabilirsiniz."
+
+#: journalApp/views.py:494
+#, python-format
+msgid "Your Issue Named <strong>'%(title)s'</strong> Has Been Created"
+msgstr "<strong>'%(title)s'</strong> Başlıklı Makaleniz Oluşturuldu"
+
+#: journalApp/views.py:533
+#, python-format
+msgid "Your Article Titled <strong>'%(title)s'</strong> Has Been Created"
+msgstr "<strong>'%(title)s'</strong> Başlıklı Makaleniz Oluşturuldu"
+
+#: journalApp/views.py:585
+#, python-format
+msgid "Your article titled <strong>'%(titleup)s'</strong> has been updated"
+msgstr "<strong>'%(titleup)s'</strong> başlıklı makaleniz güncellendi"
+
+#: journalApp/views.py:601
+#, python-format
+msgid "Your journalApp named <strong>'%(nameup)s'</strong> has been updated"
+msgstr "<strong>'%(nameup)s'</strong> adlı derginiz güncellendi"
+
+#: journalApp/views.py:626
+#, python-format
+msgid ""
+"Dear <strong>'%(usererror)s'</strong><br>This Journal Is Not Yours, You "
+"Can't Delete It!"
+msgstr ""
+"Sevgili <strong>'%(usererror)s'</strong><br>Bu Dergi Size Ait Değil, "
+"Silemezsiniz!"
+
+#: journalApp/views.py:643
+#, python-format
+msgid ""
+"Dear <strong>'%(dear)s'</strong><br><strong>'%(article_title)s'</strong> "
+"named article is deleted!"
+msgstr ""
+"Sevgili <strong>'%(dear)s'</strong><br>'%(article_title)s' İsimli Makale "
+"Silindi."
+
+#: journalApp/views.py:654
+#, python-format
+msgid ""
+"Dear <strong>'%(dear)s'</strong><br>This Article Is Not Your Own, You Can't "
+"Delete It!"
+msgstr ""
+"Sevgili <strong>'%(dear)s'</strong><br>Bu Makale Size Ait Değil, "
+"Silemezsiniz!"
+
+#: templates/base.html:26
+msgid "ONECKI, Blog, Journal"
+msgstr "ONECKI, Blog, Dergi"
+
+#: templates/base.html:28
+msgid ""
+"Blog, Philosophy, Book, Medicine, Artificial Intelligence, Religion, "
+"Literature, Art, Research, Reading"
+msgstr "Blog, Felsefe, Kitap, Tıp, Yapay Zeka, Din, Edebiyat, Sanat, Araştırma"
+
+#: templates/base.html:30
+msgid ""
+"An Open Channel for Your Ideas, Your Personal Blog / Journal Site, A Virtual "
+"Archive"
+msgstr ""
+"Fikirleriniz İçin Açık Bir Kanal, Kişisel Blog / Dergi Siteniz, Bir Sanal "
+"Arşiv"
+
+#: templates/base.html:99
+msgid "Log in"
+msgstr "Giriş Yap"
+
+#: templates/base.html:113 templates/base.html:224
+msgid "My profile"
+msgstr "Profilim"
+
+#: templates/base.html:121
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: templates/base.html:125
+msgid "Update your profile"
+msgstr "Profilini Güncelle"
+
+#: templates/base.html:126
+msgid "Change your email"
+msgstr "E-mail'ini değiştir"
+
+#: templates/base.html:127
+msgid "Change your password"
+msgstr "Parolanı değiştir"
+
+#: templates/base.html:151
+msgid "About us"
+msgstr "Hakkımızda"
+
+#: templates/base.html:159
+msgid "Contact"
+msgstr "İletişim"
+
+#: templates/base.html:199
+msgid "No Notification"
+msgstr "Bildirim Yok"
+
+#: templates/base.html:232
+msgid "Write an Article"
+msgstr "Makale Yaz"
+
+#: templates/base.html:236
+msgid "Sign out"
+msgstr "Çıkış"
+
+#~ msgid "Profile"
+#~ msgstr "Profil"
+
+#~ msgid "Hiçbir Değişiklik Yapmadınız :)"
+#~ msgstr "Anything Changed :)"
+
+#~ msgid "Change"
+#~ msgstr "Değiştir"
+
+#~ msgid "category"
+#~ msgstr "kategorisi"
+
+#~ msgid "Category"
+#~ msgstr "Kategorisi"
+
+#~ msgid "views"
+#~ msgstr "görüntülenme"
+
+#~ msgid "Please Enter Your E-Mail Address"
+#~ msgstr "Lütfen E-mail adresinizi giriniz"
+
+#~ msgid "Simplified Chinese"
+#~ msgstr "Çince"
+
+#~ msgid "Change language"
+#~ msgstr "Dili Değiştir"

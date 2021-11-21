@@ -1,0 +1,266 @@
+{% load static %}
+{% load i18n %}
+{% load custom_tags %}
+{% get_current_language as language_code %}
+{% get_available_languages as languages %}
+
+<!DOCTYPE html>
+<html lang="{{ language_code }}">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="title" content="{% trans 'ONECKI, Blog, Journal' %}"/>
+    <meta name="keywords"
+          content="{% trans 'Blog, Philosophy, Book, Medicine, Artificial Intelligence, Religion, Literature, Art, Research, Reading' %}"/>
+    <meta name="description"
+          content="{% trans 'An Open Channel for Your Ideas, Your Personal Blog / Journal Site, A Virtual Archive' %}"/>
+    <meta name="author" content="Burak CAN">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <script type="text/javascript" rel="script" src="{% static 'js/jquery.js' %}"></script>
+
+    <script rel="script" type="text/javascript" src="{% static 'fontawesome/js/all.min.js' %}"></script>
+
+    <link href="{% static 'fontawesome/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+
+    {% block ust_icerik %}
+
+    {% endblock %}
+
+    {% block css %}
+
+    {% endblock %}
+    <title>
+        {% block title %}
+
+        {% endblock %}
+    </title>
+    <style>
+
+        {% block style %}
+        {% endblock %}
+
+    </style>
+
+</head>
+
+<body class="bg-white">
+
+{% include "messages.html" %}
+
+
+<div id="items-logo" class="items-logo bg-efl">
+    <a href="{% url 'index' %}">
+        <img class="img-logo" src="{% static 'icons/logo-frame.svg' %}" alt="">
+    </a>
+</div>
+
+
+<div id="left-column" class="left-column bg-efl">
+    <div class="items-left">
+        <a href="{% url 'index' %}">
+            <img class="item-img" src="{% static 'icons/home.svg' %}" alt="">
+            <p class="item-text">{% trans 'Home' %}</p>
+        </a>
+    </div>
+    {% if not request.user.is_authenticated %}
+
+        <div class="items-left">
+            <a href="{% url 'journalindex' %}" class="a-sub">
+                <img class="item-img" src="{% static 'icons/journals.svg' %}" alt="">
+                <p class="item-text">{% trans 'Journals' %}</p>
+            </a>
+
+        </div>
+
+        <div class="items-left">
+            <a href="{% url 'accounts:log_in' %}" class="a-sub">
+                <img class="item-img" src="{% static 'icons/about.svg' %}" alt="" style="width: 30px;height: 25px">
+                <p class="item-text">{% trans 'Log in' %}</p>
+            </a>
+        </div>
+
+        <div class="items-left">
+            <a href="{% url 'accounts:sign_up' %}" class="a-sub">
+                <img class="item-img" src="{% static 'icons/contact.svg' %}" alt="">
+                <p class="item-text">{% trans 'Sign Up' %}</p>
+            </a>
+        </div>
+    {% else %}
+        <div class="items-left">
+            <a href="{% url 'accounts:user-profile' request.user.username %}" class="a-sub">
+                <img class="item-img" src="{% static 'icons/contact.svg' %}" alt="">
+                <p class="item-text"> {% trans 'My profile' %}</p>
+            </a>
+
+        </div>
+
+        <div class="items-left">
+            <a class="a-sub">
+                <img class="item-img" src="{% static 'icons/contact.svg' %}" alt="">
+                <p class="item-text"> {% trans "Settings" %}</p>
+            </a>
+            <ul class="sub-menu bg-blue">
+
+                <li><a href="{% url 'accounts:change_profile' %}">{% trans "Update your profile" %}</a></li>
+                <li><a href="{% url 'accounts:change_email' %}">{% trans "Change your email" %}</a></li>
+                <li><a href="{% url 'accounts:change_password' %}">{% trans "Change your password" %}</a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="items-left">
+            <a class="a-sub">
+                <img class="item-img" src="{% static 'icons/contact.svg' %}" alt="">
+                <p class="item-text"> {% trans "Journals" %}</p>
+            </a>
+            <ul class="sub-menu bg-blue">
+
+                <li><a href="{% url 'journalindex' %}">{% trans "Subscriptions" %}</a></li>
+                <li><a href="{% url 'journalall' %}">{% trans "All Journals" %}</a></li>
+
+            </ul>
+        </div>
+
+    {% endif %}
+
+    <div class="items-left">
+        <a href="{% url 'about' %}" class="a-sub">
+            <img class="item-img" src="{% static 'icons/contact.svg' %}" alt="">
+            <p class="item-text"> {% trans "About us" %}</p>
+        </a>
+
+    </div>
+
+    <div class="items-left">
+        <a href="{% url 'contact' %}" class="a-sub">
+            <img class="item-img" src="{% static 'icons/contact.svg' %}" alt="">
+            <p class="item-text"> {% trans "Contact" %}</p>
+        </a>
+
+    </div>
+</div>
+
+
+<div id="right-column" class="right-column">
+    <nav id="top-nav" class="bg-efl">
+        <div class="top-left">
+            <div id="toggle" class="toggle-cls"></div>
+        </div>
+        <div class="top-right">
+            <div class="top-right-item dropdown show">
+
+                <a href="#" role="button" id="dropdownMenuLink3"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="{% static 'icons/lang-frame.svg' %}" alt="">
+                </a>
+
+                {% include 'change_language.html' %}
+
+            </div>
+
+            <div class="top-right-item dropdown show">
+                {% if request.user.is_authenticated %}
+                    
+                    {% show_notifications %}
+
+                {% else %}
+                    <a href="#" role="button" id="dropdownMenuLink2" style="color:black"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="{% static 'icons/notification-frame.svg' %}" alt="">
+                        <div class="noti-num">
+                            <span class="text-xs">0</span>
+                        </div>
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+                
+                            <a class="dropdown-item" href="#">
+                                {% trans "No Notification" %} 
+                            </a>
+                    </div>
+                {% endif %}
+
+            </div>  
+
+            <div class="top-right-item dropdown show">
+
+                <a href="#" role="button" id="dropdownMenuLink"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="{% static 'icons/profile-frame.svg' %}" alt="">
+                    <img class="prfl-img"
+                         src="
+                            {% if user.is_authenticated %}
+                                {{ request.user.userprofile.get_profile_photo }}
+                            {% else %}
+                                {% static '../media/uploads/avatars/default.svg' %}
+                            {% endif %}" alt="">
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    {% if request.user.is_authenticated %}
+
+                        <a class="dropdown-item" href="{% url 'accounts:user-profile' request.user.username %}">
+                            <i class="fas fa-user-circle pull-right"
+                               style="margin-right: 2px"></i><span>{% trans "My profile" %}</span>
+                        </a>
+
+                        <a class="dropdown-item" href="{% url 'journal_create' %}">
+                            <i class="fa fa-newspaper pull-right"></i><span>{% trans "Create a Journal" %}</span>
+                        </a>
+
+                        <a class="dropdown-item" href="{% url 'article_create' %}">
+                            <i class="fas fa-file-signature pull-right"></i><span>{% trans "Write an Article" %}</span>
+                        </a>
+
+                        <a class="dropdown-item" href="{% url 'accounts:log_out' %}">
+                            <i class="fas fa-sign-out-alt pull-right"></i><span>{% trans "Sign out" %}</span>
+                        </a>
+
+                    {% else %}
+                        <a class="dropdown-item" href="{% url 'accounts:log_in' %}">
+                            <i class="fa fa-sign-in-alt pull-right"></i><span>{% trans "Sign in" %}</span>
+                        </a>
+                        <a class="dropdown-item" href="{% url 'accounts:sign_up' %}">
+                            <i class="fa fa-user-plus pull-right"></i><span>{% trans "Sign Up" %}</span>
+                        </a>
+                    {% endif %}
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </nav>
+    <div style="margin-top: 80px;z-index: -1">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+
+    <div class="footer bg-efl" style="z-index: -2;">
+        ONECKI © 2020 - 2021
+    </div>
+
+</div>
+
+
+<script src="{% static 'js/main.js' %}"></script>
+
+
+<script type="text/javascript" rel="script" src="{% static 'bootstrap/js/popper.min.js' %}"></script>
+<script type="text/javascript" rel="script" src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+{% block alt_icerik %}
+
+{% endblock %}
+
+
+</body>
+
+</html>

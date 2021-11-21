@@ -1,0 +1,422 @@
+{% extends "base.html" %}
+{% load hitcount_tags %}
+{% load static %}
+{% load i18n %}
+
+
+{% block title %}
+    {{ user.userprofile.user_full_name }} Profil Sayfası
+{% endblock %}
+
+{% block ust_icerik %}
+    <script type="text/javascript" rel="script">
+        $(document).ready(function () {
+            $(".journal-follow-field").on("click", ".subscribe-journal", function (e) {
+                e.preventDefault();
+                var $this = $(this);
+                var $url = $this.attr("href");
+                $.ajax({
+                    url: $url,
+                    method: "GET",
+                    data: {},
+                    success: function (data) {
+                        var response = data.status;
+                        var count = data.count;
+                        var $i = $this.find(".follow-hand");
+                        if (response === "added") {
+                            $i.addClass("fav-active");
+                            $i.removeClass("fav-deactive");
+                            $i.html("{% trans 'Unsubscribe' %}")
+                        } else {
+                            $i.removeClass("fav-active");
+                            $i.addClass("fav-deactive");
+                            $i.html("{% trans 'Subscribe' %}")
+                        }
+
+                        $this.closest("div").find(".subscription-count").html(count)
+                    }
+                })
+            }).on("click", ".subscribe-btn", function (e) {
+                e.preventDefault();
+                var $this = $(this);
+                var $url = $this.attr("url");
+                var $modal = $("#follow_modal");
+                $.ajax({
+                    url: $url,
+                    method: "GET",
+                    dataType: "json",
+                    beforeSend: function () {
+                        $modal.modal("show");
+                    },
+                    success: function (data) {
+                        $modal.find(".follow_body").html(data.html)
+                    }
+
+                })
+            });
+            $(".post-footer").on("click", ".add-favorite-button", function (e) {
+                e.preventDefault();
+                var $this = $(this);
+                var $url = $this.attr("href");
+                $.ajax({
+                    url: $url,
+                    method: "GET",
+                    data: {},
+                    success: function (data) {
+                        var response = data.status;
+                        var count = data.count;
+                        var $i = $this.find(".fav-hand");
+                        console.log($i);
+                        if (response === "added") {
+                            $i.removeClass("fav-deactive");
+                            $i.addClass("fav-active");
+                        } else {
+                            $i.removeClass("fav-active");
+                            $i.addClass("fav-deactive");
+
+                        }
+                        $this.closest("div").find(".favorite-count").html(count)
+                    }
+                })
+            }).on("click", ".likesbtn", function (e) {
+                e.preventDefault();
+                var $this = $(this);
+                var $url = $this.attr("url");
+                var $modal = $("#post-favorite-modal");
+                $.ajax({
+                    url: $url,
+                    method: "GET",
+                    dataType: "json",
+                    beforeSend: function () {
+                        $modal.modal("show");
+                    },
+                    success: function (data) {
+                        $modal.find(".modal-body").html(data.html)
+                    }
+
+                })
+            });
+
+        });
+
+    </script>
+{% endblock %}
+
+{% block content %}
+    {% include "journalApp/include/follower_dergi_modal.html" %}
+    {% include "journalApp/favorite/favorite_modal.html" %}
+
+
+    <div class="py-5">
+        <div class="col-md-8 mx-auto">
+            <!-- Profile widget -->
+            <div class="bg-white shadow rounded overflow-hidden">
+                <div class="px-4 pt-0 pb-4 cover d-flex justify-content-center flex-column align-items-center"
+                     style=";background-image: url('{% static "../media/profile-covers/default/default.jpeg" %}')">
+                    <div style="width:fit-content">
+                        <div class="media align-items-center">
+                            <div class="profile mr-3 mt-4">
+                                <img {% if user.userprofile.get_profile_photo %}
+                                        src="{{ user.userprofile.get_profile_photo }}"
+                                    {% endif %} alt="..." style="width:130px;height:130px;clip-path:circle();object-fit:cover";
+                                    class="rounded-circle img-thumbnail">
+                            
+                            </div>
+                            <div class="media-body text-white mt-4">
+                                <h4 class="mt-0 mb-0">{{ user.userprofile.user_full_name }}</h4>
+                                <p class="small mb-0"><i class="fas fa-at mr-2"></i>{{ user.username }}</p>
+                            </div>
+                            
+                        </div>
+                        {% if user == request.user %}
+                            <div>
+                                <a href="{% url "accounts:change_profile" %}" class="text-sm mt-2 btn btn-outline-light btn-info btn-block">
+                                    {% trans "Edit Profile" %}
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="bg-light p-4 d-flex justify-content-end text-center">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item">
+                            <h5 class="font-weight-bold mb-0 d-block">{{ user_journals.count }}</h5><small
+                                class="text-muted"> <i
+                                class="fas fa-journal-whills mr-1"></i>{% trans "Journals" %}</small>
+                        </li>
+                        <li class="list-inline-item">
+                            <h5 class="font-weight-bold mb-0 d-block">{{ user_articles.count }}</h5><small
+                                class="text-muted"> <i
+                                class="fas fa-scroll mr-1"></i>{% trans "Articles" %}</small>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="px-4 py-3">
+
+                    <h5 class="mb-0 px-4 border-bottom border-info" style="padding-bottom: 5px">
+                        {% trans "About Me!" %}
+                    </h5>
+
+                    <div class="p-4 rounded shadow-sm bg-light">
+                        <p class="font-italic mb-0">
+                            {% if user.userprofile.about|linebreaksbr == "None" or user.userprofile.about|linebreaksbr == "" %}
+                                "{{ user.userprofile.get_screen_name }}" henüz kendini tanıtmadı.
+                            {% else %}
+                                {{ user.userprofile.about|linebreaksbr }}
+                            {% endif %}
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 mx-auto">
+
+        <ul class="nav nav-pills mb-3 justify-content-center" style="padding: 0 0 10px 0;" id="pills-tab"
+            role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                   aria-controls="pills-home" aria-selected="true">{% trans "Journals" %}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+                   aria-controls="pills-profile" aria-selected="false">{% trans "Articles" %}</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="pills-tabContent">
+
+            <!-- Journals -->
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                {% if user_journals.count > 0 %}
+                    <div class="content">
+                        {% for post in user_journals %}
+                            <div class="block" style="position:relative;">
+                                <div class="post-profile">
+                                    <div>
+                                        <a href="{% url 'accounts:user-profile' post.journal_editor.username %}"
+                                           style="text-decoration:none">
+                                            <div style="font-size: 0.9rem;text-align:left;width: 100%">
+                                                {% if post.journal_editor.userprofile.get_profile_photo %}
+                                                    <div style="display:inline;vertical-align:middle">
+                                                        <img src="{{ post.journal_editor.userprofile.get_profile_photo }}"
+                                                             alt="user"
+                                                             style="width:30px;height:30px;clip-path: circle();object-fit: cover">
+                                                    </div>
+                                                {% endif %}
+                                                <div style="display:inline-block;vertical-align:middle;margin-left: 3px">
+                                    <span style="text-align:left;font-size:14px"
+                                          class="post-meta">
+                                        {{ post.journal_editor }}
+                                    </span><br>
+                                                    <span>{{ post.created|timesince }} {% trans "ago" %}</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    {% if post.journal_name in requestable and post.get_requesting_status == "open" %}
+
+                                        <div class="requesting">
+
+                                            <a href="{% url 'authorship-request' post.slug %}">{% trans "Be Author" %}</a>
+
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="post-content">
+
+                                    {% if post.journal_image %}
+                                        <div style="padding:0;text-align: center">
+                                            <a href="{% url 'journal_detail' post.slug %}" style="cursor: pointer">
+
+                                                <img style="width:100%;max-height:180px;border-radius: 2px;object-fit:cover;object-position: 50% 50%;"
+                                                     src="{{ post.journal_image.url }}" alt="">
+                                            </a>
+                                        </div>
+                                    {% endif %}
+
+                                    <div>
+                                        <a href="{% url 'journal_detail' post.slug %}" style="cursor: pointer">
+                                            <div class="post-title text-center"
+                                                 style="{% if post.journal_image %} height: 100px {% else %} height:280px {% endif %}">
+                        <span style="font-weight:bolder;font-size:2rem;color:#404040;">
+                            {{ post.journal_name|safe|truncatechars:45 }}
+                        </span>
+                                            </div>
+                                        </a>
+                                    </div>
+
+
+                                    <div style="display: flex;flex-direction:row;justify-content: space-between;align-items: center">
+                                        <div>
+                                            <a href="{% url 'journal_category_detail' post.category.slug %}">
+                                                <div class="classification">
+                                                    {{ post.category }}
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="post-footer">
+                                    <div class="journal-follow-field">
+                                        <a class="subscribe-journal" style="width:fit-content"
+                                           href="{% url 'journal_follow' post.slug %}">
+                            <span class="follow-hand {% if request.user.username in post.get_added_follower_user %} fav-active {% else %} fav-deactive {% endif %}">
+                                {% if request.user.username in post.get_added_follower_user %}
+                                    {% trans "Unsubscribe" %}
+                                {% else %}
+                                    {% trans "Subscribe" %}
+                                {% endif %}
+                            </span>
+                                        </a>
+                                        <span url="{% url 'journal_follow_user' post.slug %}"
+                                              class="btn subscribe-btn"
+                                              style="padding:3px 5px;background:#328ae7;border-color:#328ae7;border-radius:8px;color:#ffffff;font-size: 1.1rem;font-weight: 500;letter-spacing:1px">
+                            <span class="subscription-count">{{ post.get_journal_follow_count }}</span> {% trans "Subscriber" %}
+                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {% if request.user == user %}
+                        <h5 style="margin-top: 15px">Henüz Bir Dergi Oluşturmadınız</h5>
+                    {% else %}
+                        <h5 style="margin-top: 15px">Henüz Bir Dergi Yok</h5>
+                    {% endif %}
+                {% endif %}
+
+            </div>
+
+            <!-- Makaleler -->
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                {% if user_articles.count > 0 %}
+                    <div class="content">
+                        {% for post in user_articles %}
+                            <div class="block" style="position:relative;">
+                                <div class="post-profile">
+                                    <div>
+                                        <a href="{% url 'accounts:user-profile' post.author_of_article.username %}"
+                                           style="text-decoration:none;">
+                                            <div style="font-size: 0.9rem;text-align:left;width: 100%">
+                                                {% if post.author_of_article.userprofile.get_profile_photo %}
+                                                    <div style="display:inline;vertical-align:middle">
+                                                        <img src="{{ post.author_of_article.userprofile.get_profile_photo }}"
+                                                             alt="user"
+                                                             style="width:30px;height:30px;clip-path: circle();object-fit: cover">
+                                                    </div>
+                                                {% endif %}
+                                                <div style="display:inline-block;vertical-align:middle;margin-left: 3px">
+                                        <span style="text-align:left;font-size:14px"
+                                              class="post-meta">
+                                            {{ post.author_of_article }}
+                                        </span><br>
+                                                    <span>{{ post.created|timesince }} {% trans 'ago' %}</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    {% if post.journal_name_of_article.journal_name in requestable %}
+
+                                        <div class="requesting">
+
+                                            <a href="{% url 'authorship-request' post.journal_name_of_article.slug %}">{% trans "Be Author" %}</a>
+
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="post-content">
+
+                                    {% if post.article_image %}
+                                        <div style="padding:0;text-align: center">
+                                            <a href="{% url 'article_detail' post.slug %}" style="cursor: pointer">
+                                                <img style="width:100%;max-height:180px;border-radius: 2px;object-fit:cover;object-position: 50% 50%;"
+                                                     src="{{ post.article_image.url }}" alt="">
+                                            </a>
+                                        </div>
+                                    {% endif %}
+
+                                    <div>
+                                        <a href="{% url 'article_detail' post.slug %}" style="cursor: pointer">
+                                            <div class="post-title text-center"
+                                                 style="{% if post.article_image %} height: 100px {% else %} height:280px {% endif %}">
+                                    <span style="font-weight:bolder;font-size:2rem;color:#404040;">
+                                        {{ post.article_title|safe|truncatechars:45 }}
+                                    </span>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div style="display: flex;flex-direction:row;justify-content: space-between;align-items: center">
+                                        <div>
+                                            <a href="{% url 'journal_detail' post.journal_name_of_article.slug %}">
+                                                <div class="classification" style="border-right: 1px solid black">
+                                                    {{ post.journal_name_of_article }}
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <div>
+                                            <a href="{% url 'journal_category_detail' post.journal_name_of_article.category.slug %}">
+                                                <div class="classification">
+                                                    {{ post.journal_name_of_article.category }}
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="post-footer">
+                                    <div>
+                                        <i class="fa fa-comment" aria-hidden="true"></i>
+                                        {{ post.get_comments_article }}
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                        {% get_hit_count for post %}
+                                    </div>
+                                    <div style="display: flex;justify-content: center;align-items: center">
+                                        <a class="add-favorite-button" style="width:fit-content"
+                                           href="{% url 'favorite-article-page' post.slug %}">
+                                            <i class="fas fa-heart fav-hand {% if request.user.username in post.get_added_favorite_article_user %} fav-active {% else %} fav-deactive {% endif %}"></i>
+                                        </a>
+                                        <button class="btn likesbtn"
+                                                url="{% url 'favorite-article-user' post.slug %}"
+                                                style="margin-left: 5px;border-radius: 50%;background: #7B5AF2;color: white;font-size: 1.1rem">
+                                            <span class="favorite-count"> {{ post.get_favorite_article_count }}</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+                    </div>
+
+                {% else %}
+                    {% if request.user == user %}
+                        <h5 style="margin-top: 15px">Henüz Bir Makale Yazmadınız</h5>
+                    {% else %}
+                        <h5 style="margin-top: 15px">Henüz Bir Makale Yok</h5>
+                    {% endif %}
+                {% endif %}
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+{% endblock %}
+

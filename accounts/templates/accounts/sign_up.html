@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {% trans 'Sign up' %}
+{% endblock %}
+
+{% block style %}
+
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+    <div class="content c-detail">
+        <div class="block-detail" style="height: fit-content">
+
+            <div class="post-profile">
+                <div><i class="fa fa-user-plus"></i> {% trans 'Registration Form' %}</div>
+            </div>
+
+            <div class="post-content" style="height: fit-content;justify-content: center">
+                {% if user.is_authenticated %}
+                    <h3>Çoktan giriş yaptınız</h3>
+                {% else %}
+                    <form action="{% url "accounts:sign_up" %}" method="post"
+                          style="width: fit-content;margin: 0 auto;text-align: center">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-lg btn-dark" style="letter-spacing: 2px">
+                            {% trans "Sign Up" %}
+                        </button>
+                        {% trans "or" %}
+                        <a style="color:white" href="{% url 'accounts:log_in' %}"
+                           class="btn btn-lg btn-dark">
+                            {% trans 'Sign In' %}
+                        </a>
+                    </form>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+
+
+
+{% endblock %}

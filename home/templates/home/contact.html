@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Contact Form' %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="profile-update">
+        <div class="content c-detail">
+            <div class="block-detail" style="   height: fit-content;">
+                <div class="post-profile">
+
+
+                    <h2> {% trans 'Contact Form' %}</h2>
+
+
+                </div>
+                <div class="post-content" style="height: fit-content;border-bottom: none;text-align: center;">
+                    <h4>{% trans "Feedback and suggestions are important to us" %}</h4>
+                    {% crispy form %}
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,593 @@
+{% extends "base.html" %}
+{% load static %}
+{% load hitcount_tags %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Journal Content" %}
+{% endblock %}
+
+{% block ust_icerik %}
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+    <script type="text/javascript" rel="script">
+
+
+        $(document).ready(function () {
+
+
+            $(".journal-follow-field").on("click", ".subscribe-journal", function (e) {
+                e.preventDefault();
+                var $this = $(this);
+                var $url = $this.attr("href");
+                $.ajax({
+                    url: $url,
+                    method: "GET",
+                    data: {},
+                    success: function (data) {
+                        var response = data.status;
+                        var count = data.count;
+                        var $i = $this.find(".follow-hand");
+                        if (response === "added") {
+                            $i.addClass("fav-active");
+                            $i.removeClass("fav-deactive");
+                            $i.html("{% trans 'Unsubscribe' %}")
+                        } else {
+                            $i.removeClass("fav-active");
+                            $i.addClass("fav-deactive");
+                            $i.html("{% trans 'Subscribe' %}")
+                        }
+
+                        $this.closest("div").find(".subscription-count").html(count)
+                    }
+                })
+            }).on("click", ".subscribe-btn", function (e) {
+                e.preventDefault();
+                var $this = $(this);
+                var $url = $this.attr("url");
+                var $modal = $("#follow_modal");
+                $.ajax({
+                    url: $url,
+                    method: "GET",
+                    dataType: "json",
+                    beforeSend: function () {
+                        $modal.modal("show");
+                    },
+                    success: function (data) {
+                        $modal.find(".follow_body").html(data.html)
+                    }
+
+                })
+            });
+
+
+            $(".post-footer").on("click", ".add-favorite-button", function (e) {
+                e.preventDefault();
+                var $this = $(this);
+                var $url = $this.attr("href");
+                $.ajax({
+                    url: $url,
+                    method: "GET",
+                    data: {},
+                    success: function (data) {
+                        var response = data.status;
+                        var count = data.count;
+                        var $i = $this.find(".fav-hand");
+                        console.log($i);
+                        if (response === "added") {
+                            $i.removeClass("fav-deactive");
+                            $i.addClass("fav-active");
+                        } else {
+                            $i.removeClass("fav-active");
+                            $i.addClass("fav-deactive");
+
+                        }
+                        $this.closest("div").find(".favorite-count").html(count)
+                    }
+                })
+            }).on("click", ".likesbtn", function (e) {
+                e.preventDefault();
+                var $this = $(this);
+                var $url = $this.attr("url");
+                var $modal = $("#post-favorite-modal");
+                $.ajax({
+                    url: $url,
+                    method: "GET",
+                    dataType: "json",
+                    beforeSend: function () {
+                        $modal.modal("show");
+                    },
+                    success: function (data) {
+                        $modal.find(".modal-body").html(data.html)
+                    }
+
+                })
+            });
+
+            $(".on-off").on("click", ".open_close_requesting", function (e) {
+                e.preventDefault();
+                var $this = $(this);
+                var $url = $this.attr("href");
+                $.ajax({
+                    url: $url,
+                    method: "GET",
+                    data: {},
+                    success: function (data) {
+                        console.log(data);
+                        var response = data.status;
+                        var $i = $this.find(".on-off-icon");
+                        if (response === "open") {
+                            $i.addClass("fav-active");
+                            $i.removeClass("fav-deactive");
+                            $i.html("<i class='fas fa-lock-open'></i>");
+                        } else {
+                            $i.removeClass("fav-active");
+                            $i.addClass("fav-deactive");
+                            $i.html("<i class='fas fa-lock'></i>");
+
+
+                        }
+
+                    }
+                })
+            });
+
+        });
+
+    </script>
+
+{% endblock %}
+
+
+{% block content %}
+
+    {% include "journalApp/include/follower_dergi_modal.html" %}
+    {% include "journalApp/favorite/favorite_modal.html" %}
+
+
+
+
+
+    <div class="alert alert-info d-flex justify-content-center align-items-center" style="text-align: center;margin:0 auto 10px auto;color:black;">
+
+        <div class="tooltip-journal" style="flex-direction: column;justify-content: center;align-items: center;">
+            <div style="position: relative;">
+                <span style="color:white">{{ journal.journal_name }}</span>
+                <i class="fas fa-caret-down" style="position:absolute;bottom:-10px;right: 50%;transform: translateX(50%);"></i>
+
+            </div>
+        </div>
+
+        {% if request.user == journal.journal_editor %}
+            <div class="ml-3">
+                <span class="on-off">
+                    <a class="open_close_requesting" style="width:fit-content"
+                       href="{% url 'open_close' journal.slug %}">
+                        <span class="dv-size on-off-icon {% if journal.get_requesting_status == "open" %} fav-active {% else %} fav-deactive {% endif %}">
+                            {% if journal.get_requesting_status == "open" %}
+                                <i class="fas fa-lock-open"></i>
+                            {% else %}
+                                <i class="fas fa-lock"></i>
+                            {% endif %}
+                        </span>
+                    </a>
+                </span>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <div class="tooltip-journal-container">
+        <div class="content" style="margin-left:0">
+            <div class="block" style="height: fit-content;width:300px;">
+                <div class="post-profile" style="justify-content: center">
+                    Dergi Bilgileri
+                </div>
+                <div class="post-profile" style="position:relative;">
+                    <div>
+                        <a href="{% url 'accounts:user-profile' journal.journal_editor.username %}"
+                           style="text-decoration:none">
+                            <div style="font-size: 0.9rem;text-align:left;width: 100%">
+                                {% if journal.journal_editor.userprofile.get_profile_photo %}
+                                    <div style="display:inline;vertical-align:middle">
+                                        <img src="{{ journal.journal_editor.userprofile.get_profile_photo }}"
+                                             alt="user"
+                                             style="width:30px;height:30px;clip-path: circle();object-fit: cover">
+                                    </div>
+                                {% endif %}
+                                <div style="display:inline-block;vertical-align:middle;margin-left: 3px">
+                                    <span style="text-align:left;font-size:14px"
+                                          class="post-meta">
+                                        {{ journal.journal_editor }}
+                                    </span><br>
+                                    <span>{{ journal.created|timesince }} {% trans "ago" %}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    {% if journal.journal_name in requestable and journal.get_requesting_status == "open" %}
+
+                        <div class="requesting">
+
+                            <a href="{% url 'authorship-request' journal.slug %}">{% trans "Be Author" %}</a>
+
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="post-footer-journal-detail">
+                    <div class="journal-follow-field">
+                        <a class="subscribe-journal" style="width:fit-content"
+                           href="{% url 'journal_follow' journal.slug %}">
+                            <div class="dv-size follow-hand {% if request.user.username in journal.get_added_follower_user %} fav-active {% else %} fav-deactive {% endif %}">
+                                {% if request.user.username in journal.get_added_follower_user %}
+                                    {% trans "Unsubscribe" %}
+                                {% else %}
+                                    {% trans "Subscribe" %}
+                                {% endif %}
+                            </div>
+                        </a>
+                        <span url="{% url 'journal_follow_user' journal.slug %}" class="btn subscribe-btn dv-size"
+                              style="margin-left:5px;padding:2px 4px;background:#0021ff;border-color:#0021ff;border-radius:8px;color:#ffffff;;font-weight: 400;letter-spacing:1px">
+                          <span class="subscription-count">{{ journal.get_journal_follow_count }}</span> {% trans "Subscriber" %}
+                    </span>
+                    </div>
+                </div>
+
+                <div class="post-content" style="height: fit-content;border:none">
+                    {% if journal.journal_image %}
+                        <div style="padding:0;text-align: center">
+                            <img style="width:100%;max-height:300px;border-radius: 2px;object-fit:contain"
+                                 src="{{ journal.journal_image.url }}" alt="">
+
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if request.user == journal.journal_editor %}
+        <div class="d-flex align-items-center justify-content-center alert alert-success">
+            <a class="btn btn-dark btn-lg"
+               href="{% url "journal_update" journal.slug %}">Dergiyi Güncelle</a>
+            <a class="btn btn-dark btn-lg ml-2"
+               href="{% url "journal_delete" journal.slug %}">Dergiyi Sil</a>
+            <a class="btn btn-dark btn-lg ml-2"
+               href="{% url "issue_create" %}">Sayı Oluştur</a>
+        </div>
+    {% endif %}
+
+
+
+    {% if x == 0 %}
+
+        <div class="container text-center">
+            <p style="margin-bottom: 5px">Henüz Bir Makale Yok</p>
+            <span>Makale Yazmak İçin
+                        <a style="color:red" href="{% url 'article_create' %}">
+                            Tıklayınız
+                        </a>
+                    </span>
+        </div>
+
+    {% elif x == 1 %}
+
+
+
+        <div class="mt-3 alert alert-danger justify-content-center nav nav-pills" style="height: fit-content;padding: 0"
+             id="v-pills-tab" role="tablist">
+
+            {% for issue in issues %}
+
+                <a class="nav-link
+                    {% if request.GET.issue and mod != 0 %}
+                        {% if forloop.counter == mod %}
+                            active
+                        {% endif %}
+
+                    {% elif forloop.first %}
+                        active
+                     {% endif %}" id="v-pills-{{ issue.slug }}-tab"
+                   data-toggle="pill" href="#v-pills-{{ issue.slug }}" role="tab"
+                   aria-controls="v-pills-{{ issue.slug }}"
+                   aria-selected="
+                        {% if request.GET.issue and mod != 0 %}
+
+                                {% if forloop.counter == mod %}
+                                   true
+                                {% endif %}
+
+                        {% elif forloop.first %}
+                            true
+                        {% else %}
+                            false
+                        {% endif %}">
+                    {{ issue.name }}
+                </a>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="container">
+            <form action='' method="get" style="width: fit-content;margin: 0 auto">
+                <div class="input-group text-center">
+                    <div class="form-outline">
+                        <input type="search" id="form1" class="form-control" name="issue"
+                               style="font-size: 1.5rem"
+                               placeholder="Sayı Bul"
+                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Sayı Ara'"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="tab-content" id="v-pills-tabContent">
+            {% for issue in issues %}
+                <div class="tab-pane fade
+                    {% if request.GET.issue and mod != 0 %}
+                            {% if forloop.counter == mod %}
+                                  show active
+                            {% endif %}
+                    {% elif forloop.first %}
+                        show active
+                    {% endif %}"
+                     id="v-pills-{{ issue.slug }}" role="tabpanel"
+                     aria-labelledby="v-pills-{{ issue.slug }}-tab">
+                    <div class="content">
+                        {% for post in articleList %}
+                            {% if issue.name == post.issue_name_of_article.name %}
+                                <div class="block" style="position:relative;">
+
+                                    <div class="post-profile">
+
+                                        <div>
+                                            <a href="{% url 'accounts:user-profile' post.author_of_article.username %}"
+                                               style="text-decoration:none;">
+                                                <div style="font-size: 0.9rem;text-align:left;width: 100%">
+                                                    {% if post.author_of_article.userprofile.get_profile_photo %}
+                                                        <div style="display:inline;vertical-align:middle">
+                                                            <img src="{{ post.author_of_article.userprofile.get_profile_photo }}"
+                                                                 alt="user"
+                                                                 style="width:30px;height:30px;clip-path: circle();object-fit: cover">
+                                                        </div>
+                                                    {% endif %}
+                                                    <div style="display:inline-block;vertical-align:middle;margin-left: 3px">
+                                        <span style="text-align:left;font-size:14px"
+                                              class="post-meta">
+                                            {{ post.author_of_article }}
+                                        </span><br>
+                                                        <span>{{ post.created|timesince }} {% trans 'ago' %}</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        {% if post.journal_name_of_article.journal_name in requestable %}
+
+                                            <div class="requesting">
+
+                                                <a href="{% url 'authorship-request' post.journal_name_of_article.slug %}">{% trans "Be Author" %}</a>
+
+                                            </div>
+                                        {% endif %}
+
+                                    </div>
+
+                                    <div class="post-content">
+
+                                        {% if post.article_image %}
+                                            <div style="padding:0;text-align: center">
+                                                <a href="{% url 'article_detail' post.slug %}"
+                                                   style="cursor: pointer">
+                                                    <img style="width:100%;max-height:180px;border-radius: 2px;object-fit:cover;object-position: 50% 50%;"
+                                                         src="{{ post.article_image.url }}" alt="">
+                                                </a>
+                                            </div>
+                                        {% endif %}
+
+                                        <div>
+                                            <a href="{% url 'article_detail' post.slug %}" style="cursor: pointer">
+                                                <div class="post-title text-center"
+                                                     style="{% if post.article_image %} height: 100px {% else %} height:280px {% endif %}">
+                                    <span style="font-weight:bolder;font-size:2rem;color:#404040;">
+                                        {{ post.article_title|safe|truncatechars:45 }}
+                                    </span>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <div style="display: flex;flex-direction:row;justify-content: space-between;align-items: center">
+                                            <div>
+                                                <a href="{% url 'journal_detail' post.journal_name_of_article.slug %}">
+                                                    <div class="classification"
+                                                         style="border-right: 1px solid black">
+                                                        {{ post.journal_name_of_article }}
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div>
+                                                <a href="{% url 'journal_category_detail' post.journal_name_of_article.category.slug %}">
+                                                    <div class="classification">
+                                                        {{ post.journal_name_of_article.category }}
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="post-footer">
+                                        <div>
+                                            <i class="fa fa-comment" aria-hidden="true"></i>
+                                            {{ post.get_comments_article }}
+                                        </div>
+                                        <div>
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                            {% get_hit_count for post %}
+                                        </div>
+                                        <div style="display: flex;justify-content: center;align-items: center">
+                                            <a class="add-favorite-button" style="width:fit-content"
+                                               href="{% url 'favorite-article-page' post.slug %}">
+                                                <i class="fas fa-heart fav-hand {% if request.user.username in post.get_added_favorite_article_user %} fav-active {% else %} fav-deactive {% endif %}"></i>
+                                            </a>
+                                            <button class="btn likesbtn"
+                                                    url="{% url 'favorite-article-user' post.slug %}"
+                                                    style="margin-left: 5px;border-radius: 50%;background: #7B5AF2;color: white;font-size: 1.1rem">
+                                                <span class="favorite-count"> {{ post.get_favorite_article_count }}</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                </div>
+            {% endfor %}
+
+        </div>
+
+
+    {% endif %}
+
+    {% if issues.has_other_pages %}
+        <div class="d-flex justify-content-center">
+            <nav class="navigation">
+                <ul class="pagination">
+                    {% if issues.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="?page=1{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">1</a>
+                        </li>
+                        {% if issues.previous_page_number != 1 %}
+                            <li class="page-item">
+                                <a style="color:black" class="page-link" href="?page=
+
+
+
+
+
+
+
+
+
+
+
+
+                                        {{ issues.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"><i
+                                        class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i></a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                    <li class="page-item active">
+                        <a class="page-link" style="cursor:pointer">
+                            {% if issues.number == 1 %}
+                                1
+                            {% elif issues.number == issues.paginator.num_pages %}
+                                {{ issues.paginator.num_pages }}
+                            {% else %}
+                                {{ issues.number }}
+                            {% endif %}
+                        </a>
+                    </li>
+                    {% if issues.has_next %}
+                        {% if issues.number|add:1 < issues.paginator.num_pages and issues.next_page_number != issues.paginator.num_pages %}
+                            <li class="page-item">
+                                <a style="color:black" class="page-link" href="?page=
+
+
+
+
+
+
+
+
+
+
+
+
+                                        {{ issues.number|add:1 }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"><i
+                                        class="fas fa-caret-right"></i><i
+                                        class="fas fa-caret-right"></i></a>
+                            </li>
+                        {% endif %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=
+
+
+
+
+
+
+
+
+
+
+
+
+                                    {{ issues.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ issues.paginator.num_pages }}</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    {% endif %}
+
+
+{% endblock %}
+
+
+{% block alt_icerik %}
+
+
+    <script type="text/javascript">
+        const tooltips = Array.from(document.querySelectorAll(".tooltip-journal"));
+        const tooltipContainer = document.querySelector(".tooltip-journal-container");
+        const subscribers = document.querySelector(".subscribe-btn");
+
+        tooltips.forEach((tooltipx) => {
+            tooltipx.addEventListener("mouseenter", (e) => {
+                tooltipContainer.classList.add("fade-in");
+                if (screen.width - e.pageX < 150 && e.pageX > 150) {
+                    tooltipContainer.style.removeProperty("left");
+                    tooltipContainer.style.right = `0`;
+                } else if (e.pageX < 150) {
+                    tooltipContainer.style.removeProperty("right");
+                    tooltipContainer.style.left = `0`;
+                } else {
+                    tooltipContainer.style.removeProperty("right");
+                    tooltipContainer.style.removeProperty("left");
+                    tooltipContainer.style.left = `${e.pageX - 150}px`;
+                }
+                tooltipContainer.style.top = `${e.pageY}px`;
+            });
+            tooltipx.addEventListener("mouseout", () => {
+                tooltipContainer.classList.remove("fade-in");
+            });
+            tooltipContainer.addEventListener('mouseenter', () => {
+                tooltipContainer.classList.add("fade-in");
+            });
+            tooltipContainer.addEventListener('mouseleave', () => {
+                tooltipContainer.classList.remove("fade-in");
+            });
+            subscribers.addEventListener('click', () => {
+                tooltipContainer.classList.remove("fade-in");
+            });
+        });
+
+    </script>
+
+
+{% endblock %}

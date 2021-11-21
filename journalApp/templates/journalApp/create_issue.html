@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {% trans "Create an Issue" %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="content">
+            {% crispy form %}
+        </div>
+    </div>
+{% endblock %}

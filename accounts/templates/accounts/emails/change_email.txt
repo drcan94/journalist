@@ -1,0 +1,5 @@
+{% load i18n %}
+
+{% trans 'Click on the link below to change your e-mail address.' %}
+
+{{ uri }}

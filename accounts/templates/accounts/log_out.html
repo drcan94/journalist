@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+
+{% block title %}
+    {% trans 'We hope you come again' %}
+{% endblock %}
+
+{% block content %}
+    <div class="content c-detail">
+        <div class="block-detail" style="height: fit-content">
+
+            <div class="post-profile">
+                <div><i class="fas fa-sign-out-alt"></i> {% trans 'Exit Page' %}</div>
+            </div>
+
+            <div class="post-content" style="height: fit-content;justify-content: center">
+                <h4>{% trans 'Your Exit Has Been Made' %}</h4>
+
+                {% trans 'We are waiting for you again to spend quality time' %}
+
+                <a class="text-info" href="{% url 'accounts:log_in' %}">{% trans 'Sign in again' %}</a>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

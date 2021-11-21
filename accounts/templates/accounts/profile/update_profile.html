@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+
+{% block content %}
+    <div class="profile-update">
+        <div class="content c-detail">
+            <div class="block-detail" style="height: fit-content;">
+                <div class="post-profile">
+                    <h2> {% trans 'Update Profile' %}</h2>
+
+                </div>
+                <div class="post-content" style="height: fit-content;border-bottom: none;">
+                    {% crispy form %}
+                </div>
+              
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+{% endblock %}
+

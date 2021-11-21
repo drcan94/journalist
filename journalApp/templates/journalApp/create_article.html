@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {% trans "Create an Article" %}
+{% endblock %}
+
+    
+{% block css %}
+
+    <style type="text/css">
+        .hidden {
+            display: none;
+        }
+
+        #articleForm {
+            width: 100%;
+        }
+
+        [data-editorjs-wrapper] {
+            max-width: 100% !important;
+            width: 100%;
+            border-radius: 4px;
+            background: #000 !important;
+            /* color: #000; */
+            padding: 1.2em;
+            display: inline-block;
+            border: 1px solid #ccc;
+            color: white !important;
+        }
+
+        div[data-editorjs-holder] {
+            max-width: 100% !important;
+        }
+
+        @media (max-width: 767px) {
+            div[data-editorjs-holder] {
+                width: 100% !important;
+            }
+        }
+         #div_id_article_content div{
+            text-align: left;
+        }
+
+         .ce-paragraph--justify {
+            text-align: justify !important;
+         }
+         .ce-paragraph--center {
+            text-align: center !important;
+         }
+         .ce-paragraph--left {
+            text-align: left !important;
+         }
+         .ce-paragraph--right {
+            text-align: right !important;
+         }
+
+        .ce-block__content {
+            max-width: calc(100% - 40px);
+        }
+
+        .ce-toolbar__content{
+            max-width: calc(100% - 40px);
+        }
+
+        .cdx-notifies {
+            z-index: 52 !important;
+        }
+
+        .cdx-warning__title {
+            background-color: #fff3cd;
+            color:black;;
+        }
+         .ce-delimiter {
+            line-height: 1.6em;
+            width: 100%;
+            text-align: center !important;
+        }
+
+    </style>
+
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="container">
+        <div class="content">
+            {% crispy form %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block alt_icerik %}
+    <script>
+    $("#id_journal_name_of_article").change(function () {
+        const url = $("#articleForm").attr("data-issues-url");
+        console.log(url)
+        const journalId = $(this).val();
+        $.ajax({                      
+            url: url,                 
+            data: {
+                'journal_id': journalId     
+            },
+            success: function (data) {   
+
+                let html_data = '<option value="">---------</option>';
+                data.forEach(function (issue) {
+                    html_data += `<option value="${issue.id}">${issue.year} / ${issue.name}</option>`
+                });
+                $("#id_issue_name_of_article").html(html_data);
+
+            }
+        });
+
+    });
+</script>
+
+{% endblock %}
