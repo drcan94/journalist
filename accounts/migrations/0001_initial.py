@@ -50,7 +50,7 @@ class Migration(migrations.Migration):
                 ('about', models.TextField(blank=True, max_length=2000, null=True, verbose_name='About Me')),
                 ('gender', models.CharField(blank=True, choices=[(None, 'Gender'), ('man', 'Man'), ('woman', 'Woman')], max_length=10, null=True, verbose_name='Gender')),
                 ('profile_photo', models.ImageField(blank=True, null=True, upload_to='', verbose_name='Profile Photo')),
-                ('dogum_tarihi', models.DateField(blank=True, null=True, verbose_name='Date of birth')),
+                ('birth_year', models.DateField(blank=True, null=True, verbose_name='Date of birth')),
                 ('user', models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='User')),
             ],
             options={

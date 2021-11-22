@@ -225,7 +225,7 @@ class ChangeProfileView(LoginRequiredMixin, FormView):
         initial['gender'] = user.userprofile.gender
         initial['profile_photo'] = user.userprofile.profile_photo
         initial['about'] = user.userprofile.about
-        initial['dogum_tarihi'] = user.userprofile.dogum_tarihi
+        initial['birth_year'] = user.userprofile.birth_year
 
         return initial
 
@@ -237,7 +237,7 @@ class ChangeProfileView(LoginRequiredMixin, FormView):
         user.userprofile.gender = form.cleaned_data['gender']
         user.userprofile.profile_photo = form.cleaned_data['profile_photo']
         user.userprofile.about = form.cleaned_data['about']
-        user.userprofile.dogum_tarihi = form.cleaned_data["dogum_tarihi"]
+        user.userprofile.birth_year = form.cleaned_data["birth_year"]
         user.save()
         user.userprofile.save()
 

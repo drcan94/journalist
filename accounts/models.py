@@ -22,7 +22,7 @@ class UserProfile(models.Model):
     GENDER = ((None, _('Gender')), ('man', _('Man')), ('woman', _('Woman')))
     gender = models.CharField(choices=GENDER, blank=True, null=True, max_length=10, verbose_name=_('Gender'))
     profile_photo = models.ImageField(null=True, blank=True, verbose_name=_('Profile Photo'))
-    dogum_tarihi = models.DateField(null=True, blank=True, verbose_name=_('Date of birth'))
+    birth_year = models.DateField(null=True, blank=True, verbose_name=_('Date of birth'))
 
     class Meta:
         verbose_name_plural = _('User Profiles')

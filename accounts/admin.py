@@ -9,7 +9,7 @@ from import_export.admin import ImportExportModelAdmin
 
 @admin.register(UserProfile)
 class PostAdmin(ImportExportModelAdmin):
-    list_display = ["user", "about", "gender", "dogum_tarihi"]
+    list_display = ["user", "about", "gender", "birth_year"]
 
     class Meta:
         model = UserProfile

@@ -271,14 +271,14 @@ class ChangeProfileForm(forms.Form):
     last_name = forms.CharField(label=_('Last Name'), max_length=150, required=False)
     username = forms.CharField(label=_('Username'), max_length=150, required=False)
     gender = forms.ChoiceField(required=False, choices=UserProfile.GENDER, label=_('Gender'))
-    dogum_tarihi = forms.DateField(input_formats=("%d.%m.%Y",), widget=forms.DateInput(format="%d.%m.%Y"),
+    birth_year = forms.DateField(input_formats=("%d.%m.%Y",), widget=forms.DateInput(format="%d.%m.%Y"),
                                    required=True, label=_('Date of birth'))
     profile_photo = forms.ImageField(required=False, label=_('Profile Photo'))
     about = forms.CharField(widget=forms.Textarea, required=False, label=_('About Me'))
 
     class Meta:
         model = CustomUser
-        fields = ["first_name", "last_name", "username", "gender", "dogum_tarihi", "profile_photo", "about"]
+        fields = ["first_name", "last_name", "username", "gender", "birth_year", "profile_photo", "about"]
 
     def __init__(self, *args, **kwargs):
         super(ChangeProfileForm, self).__init__(*args, **kwargs)
@@ -288,7 +288,7 @@ class ChangeProfileForm(forms.Form):
                 self.fields[i].widget.attrs = {"class": "single-input"}
         self.fields["about"].widget.attrs["rows"] = 10
         self.fields["about"].widget.attrs["cols"] = 30
-        self.fields["dogum_tarihi"].widget.attrs["placeholder"] = "GG.AA.YYYY"
+        self.fields["birth_year"].widget.attrs["placeholder"] = "GG.AA.YYYY"
 
         self.helper = FormHelper()
 
