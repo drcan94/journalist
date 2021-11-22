@@ -340,8 +340,8 @@
             {% if  article.author_of_article == request.user %}
                 <div class="post-footer edit-detail">
                     <a href="{% url 'article_update' article.slug %}"
-                       class="btn btn-success post-upd">Düzenle</a>
-                    <a href="{% url 'article_delete' article.slug %}" class="btn btn-danger post-del">Sil</a>
+                       class="btn btn-success post-upd">{% trans 'Update' %}</a>
+                    <a href="{% url 'article_delete' article.slug %}" class="btn btn-danger post-del">{% trans 'Delete' %}</a>
                 </div>
 
             {% endif %}
@@ -356,7 +356,7 @@
             <div class="post-profile">
                 <div style="display: flex;justify-content: center;align-items: center"><i class="fa fa-comment"></i>
                     <span class="dv-size ml-2">Yorumlar</span></div>
-                <div class="dv-size">{{ article.get_comments_article }} Yorum</div>
+                <div class="dv-size">{{ article.get_comments_article }} {% trans 'Comments' %}</div>
             </div>
 
 
@@ -387,7 +387,7 @@
 
                 <div class="post-footer">
 
-                    <h3>Henüz Yorum Yok</h3>
+                    <h3>{% trans 'No comments yet' %}</h3>
 
                 </div>
 
