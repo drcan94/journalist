@@ -1,4 +1,4 @@
-django
+django==3.2
 django_crispy_forms
 django_bootstrap4
 django-hitcount
@@ -9,5 +9,4 @@ psycopg2-binary
 Unidecode
 Pillow
 fontawesome-free==5.15.3
-django
 django-editorjs
