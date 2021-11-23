@@ -65,7 +65,7 @@
 
     {% include "journalApp/favorite/favorite_modal.html" %}
 
-    
+
     <div class="container-fluid" style="margin-top: -10px">
         <form action="" method="get">
             <div class="input-group" style="justify-content: center">
@@ -81,26 +81,30 @@
                 </button>
             </div>
         </form>
-    </div>  
+    </div>
 
     {% if request.GET.search %}
         <div style="text-align: center;margin: 10px 0 10px 0">
             <span class="subheading">
                 {% if allcounter == 0 %}
-                    <a class="btn btn-dark" href="{% url 'article_create' %}">'{{ request.GET.search }}' ile ilgili sonuç yok. Lütfen Bu Konuda Sen Yaz!</a>
+                    <a class="text-warning text-underline" href="{% url 'article_create' %}">
+                        {% blocktrans with search=request.GET.search %}There are no results about '{{ search }}'. Would you like to write about it?{% endblocktrans %}
+                    </a>
                 {% else %}
-                    '{{ request.GET.search }}' ile ilişkili {{ allcounter }} sonuç
+                    <span class="text-warning text-underline">
+                        {% blocktrans with search=request.GET.search %}'{{ allcounter }}' results for '{{ search }}'{% endblocktrans %}
+                    </span>
                 {% endif %}
             </span>
         </div>
     {% endif %}
 
     {% if x == 0 %}
-        <div class="container text-center mt-3">
-            <span>Henüz Bir Makale Yok</span><br>
-            <a style="color:red"
+        <div class="container text-center mt-3 text-wht">
+            <span>{% trans "There is no articles yet" %}</span><br>
+            <a class="text-warning"
                href="{% url 'journalall' %}">
-                <span>Makalelerini Okumak İstediğiniz Dergiler İçin Tıklayınız</span>
+                <span>{% trans "Click to see the journals whose articles you would like to read" %}</span>
             </a>
 
         </div>
@@ -164,7 +168,8 @@
                             </a>
                         </div>
 
-                        <div style="display: flex;flex-direction:row;justify-content: space-between;align-items: center" class="category_journal">
+                        <div style="display: flex;flex-direction:row;justify-content: space-between;align-items: center"
+                             class="category_journal">
                             <div>
                                 <a href="{% url 'journal_detail' post.journal_name_of_article.slug %}">
                                     <div class="classification">
@@ -223,6 +228,7 @@
                             {% if article_follow.previous_page_number != 1 %}
                                 <li class="page-item">
                                     <a class="page-link" href="?page=
+
                                             {{ article_follow.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"><i
                                             class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i></a>
                                 </li>
@@ -243,6 +249,7 @@
                             {% if article_follow.number|add:1 < article_follow.paginator.num_pages and article_follow.next_page_number != article_follow.paginator.num_pages %}
                                 <li class="page-item">
                                     <a class="page-link" href="?page=
+
                                             {{ article_follow.number|add:1 }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"><i
                                             class="fas fa-caret-right"></i><i
                                             class="fas fa-caret-right"></i></a>
@@ -251,6 +258,7 @@
                             <li class="page-item">
                                 <a class="page-link"
                                    href="?page=
+
                                            {{ article_follow.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ article_follow.paginator.num_pages }}</a>
                             </li>
                         {% endif %}

@@ -148,7 +148,7 @@
                         <a href="{% url 'journal_detail' post.slug %}" style="cursor: pointer">
                             <div class="post-title text-center"
                                  style="{% if post.journal_image %} height: 100px {% else %} height:280px {% endif %}">
-                        <span style="font-weight:bolder;font-size:2rem;color:#404040;">
+                        <span style="font-weight:bolder;font-size:2rem" class="text-wht">
                             {{ post.journal_name|safe|truncatechars:45 }}
                         </span>
                             </div>

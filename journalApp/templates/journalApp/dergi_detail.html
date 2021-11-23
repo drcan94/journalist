@@ -268,13 +268,13 @@
 
     {% if x == 0 %}
 
-        <div class="container text-center">
-            <p style="margin-bottom: 5px">Henüz Bir Makale Yok</p>
-            <span>Makale Yazmak İçin
-                        <a style="color:red" href="{% url 'article_create' %}">
-                            Tıklayınız
-                        </a>
-                    </span>
+         <div class="container text-center mt-3 text-wht">
+            <span>{% trans "There is no articles yet" %}</span><br>
+            <a class="text-warning"
+               href="{% url 'article_create' %}">
+                <span>{% trans "Click to write an article" %}</span>
+            </a>
+
         </div>
 
     {% elif x == 1 %}
@@ -401,7 +401,7 @@
                                             <a href="{% url 'article_detail' post.slug %}" style="cursor: pointer">
                                                 <div class="post-title text-center"
                                                      style="{% if post.article_image %} height: 100px {% else %} height:280px {% endif %}">
-                                    <span style="font-weight:bolder;font-size:2rem;color:#404040;">
+                                    <span style="font-weight:bolder;font-size:2rem" class="text-wht">
                                         {{ post.article_title|safe|truncatechars:45 }}
                                     </span>
                                                 </div>
@@ -473,20 +473,7 @@
                         </li>
                         {% if issues.previous_page_number != 1 %}
                             <li class="page-item">
-                                <a style="color:black" class="page-link" href="?page=
-
-
-
-
-
-
-
-
-
-
-
-
-                                        {{ issues.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"><i
+                                <a style="color:black" class="page-link" href="?page={{ issues.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"><i
                                         class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i></a>
                             </li>
                         {% endif %}
@@ -505,39 +492,13 @@
                     {% if issues.has_next %}
                         {% if issues.number|add:1 < issues.paginator.num_pages and issues.next_page_number != issues.paginator.num_pages %}
                             <li class="page-item">
-                                <a style="color:black" class="page-link" href="?page=
-
-
-
-
-
-
-
-
-
-
-
-
-                                        {{ issues.number|add:1 }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"><i
+                                <a style="color:black" class="page-link" href="?page={{ issues.number|add:1 }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"><i
                                         class="fas fa-caret-right"></i><i
                                         class="fas fa-caret-right"></i></a>
                             </li>
                         {% endif %}
                         <li class="page-item">
-                            <a class="page-link" href="?page=
-
-
-
-
-
-
-
-
-
-
-
-
-                                    {{ issues.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ issues.paginator.num_pages }}</a>
+                            <a class="page-link" href="?page={{ issues.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ issues.paginator.num_pages }}</a>
                         </li>
                     {% endif %}
                 </ul>

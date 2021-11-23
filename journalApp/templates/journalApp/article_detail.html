@@ -355,7 +355,7 @@
 
             <div class="post-profile">
                 <div style="display: flex;justify-content: center;align-items: center"><i class="fa fa-comment"></i>
-                    <span class="dv-size ml-2">Yorumlar</span></div>
+                    <span class="dv-size ml-2">{% trans "Comments" %}</span></div>
                 <div class="dv-size">{{ article.get_comments_article }} {% trans 'Comments' %}</div>
             </div>
 
@@ -370,7 +370,7 @@
             {% else %}
                 <div class="card" style="background: none;border: none">
                     <div class="card-body text-center">
-                        <h4 class="card-title" style="margin-bottom: 10px;">Yorum Yapmak İçin Lütfen</h4>
+                        <h4 class="card-title" style="margin-bottom: 10px;">{% trans "To leave a comment, please" %}</h4>
                         <p class="card-text">
                             <a class="text-efl" href="{% url "accounts:sign_up" %}">{% trans "Sign Up" %}</a>
                             veya

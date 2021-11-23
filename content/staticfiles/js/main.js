@@ -3,7 +3,7 @@ window.setTimeout(function () {
         $(this).remove();
     });
 
-}, 1000 * 2.5);
+}, 1000 * 3.5);
 
 let prevScrollpos = window.pageYOffset;
 window.onscroll = function () {

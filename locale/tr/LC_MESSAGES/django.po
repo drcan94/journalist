@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-22 22:33+0300\n"
+"POT-Creation-Date: 2021-11-24 01:31+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -296,7 +296,7 @@ msgstr "Hakkımda"
 #: .\accounts\templates\accounts\profile\userprofile.html:215
 #: .\accounts\templates\accounts\profile\userprofile.html:322
 #: .\journalApp\templates\journalApp\article_detail.html:418
-#: .\journalApp\templates\journalApp\article_follow_list.html:130
+#: .\journalApp\templates\journalApp\article_follow_list.html:134
 #: .\journalApp\templates\journalApp\categories\detail.html:94
 #: .\journalApp\templates\journalApp\dergi_all.html:119
 #: .\journalApp\templates\journalApp\dergi_detail.html:208
@@ -307,7 +307,7 @@ msgstr "önce"
 
 #: .\accounts\templates\accounts\profile\userprofile.html:225
 #: .\accounts\templates\accounts\profile\userprofile.html:331
-#: .\journalApp\templates\journalApp\article_follow_list.html:139
+#: .\journalApp\templates\journalApp\article_follow_list.html:143
 #: .\journalApp\templates\journalApp\categories\detail.html:104
 #: .\journalApp\templates\journalApp\dergi_all.html:129
 #: .\journalApp\templates\journalApp\dergi_detail.html:218
@@ -680,9 +680,14 @@ msgstr "Beğeniler"
 msgid "Delete"
 msgstr "sil"
 
+#: .\journalApp\templates\journalApp\article_detail.html:358
 #: .\journalApp\templates\journalApp\article_detail.html:359
 msgid "Comments"
 msgstr "Yorum"
+
+#: .\journalApp\templates\journalApp\article_detail.html:373
+msgid "To leave a comment, please"
+msgstr "Yorum yapmak için lütfer"
 
 #: .\journalApp\templates\journalApp\article_detail.html:377
 #: .\templates\base.html:226
@@ -699,7 +704,26 @@ msgstr "sil"
 
 #: .\journalApp\templates\journalApp\article_follow_list.html:75
 msgid "Search"
-msgstr ""
+msgstr "Ara"
+
+#: .\journalApp\templates\journalApp\article_follow_list.html:91
+#, python-format
+msgid ""
+"There are no results about '%(search)s'. Would you like to write about it?"
+msgstr "%(search)s hakkında hiçbir sonuç yok. Bu konuda yazmak ister misin?"
+
+#: .\journalApp\templates\journalApp\article_follow_list.html:95
+#, python-format
+msgid "'%(allcounter)s' results for '%(search)s'"
+msgstr "'%(search)s' için '%(allcounter)s' sonuç"
+
+#: .\journalApp\templates\journalApp\article_follow_list.html:104
+msgid "There is no articles yet"
+msgstr "Henüz bir makale yok"
+
+#: .\journalApp\templates\journalApp\article_follow_list.html:107
+msgid "Click to see the journals whose articles you would like to read"
+msgstr "Makalelerini okumak istediğiniz dergiler için tıklayınız"
 
 #: .\journalApp\templates\journalApp\categories\detail.html:8
 #: .\journalApp\templates\journalApp\categories\detail.html:70
@@ -854,7 +878,7 @@ msgid ""
 "You Don't Have A Journal You Are The Author Of<br>You Can Create A New "
 "Journal If You Want"
 msgstr ""
-"Yazarı Olduğunu Bir Dergi Yok.<br>İsterseniz Kendi Derginizi "
+"Yazarı Olduğunuz Bir Dergi Yok.<br>İsterseniz Kendi Derginizi "
 "Oluşturabilirsiniz."
 
 #: .\journalApp\views.py:472
@@ -904,19 +928,19 @@ msgstr ""
 "Sevgili <strong>'%(dear)s'</strong><br>Bu Makale Size Ait Değil, "
 "Silemezsiniz!"
 
-#: .\journal\settings.py:181
+#: .\journal\settings.py:169
 msgid "English"
 msgstr "İngilizce"
 
-#: .\journal\settings.py:182
+#: .\journal\settings.py:170
 msgid "Türkçe"
 msgstr "Türkçe"
 
-#: .\journal\settings.py:183
+#: .\journal\settings.py:171
 msgid "Russian"
 msgstr "Rusça"
 
-#: .\journal\settings.py:184
+#: .\journal\settings.py:172
 msgid "Chinese"
 msgstr "Çince"
 
